@@ -1,0 +1,106 @@
+aid: hexagon
+name: Hexagon
+description: >-
+  Hexagon is a global leader in digital reality solutions, combining sensor,
+  software and autonomous technologies. Through the Nexus platform and product
+  APIs, Hexagon delivers manufacturing intelligence capabilities spanning
+  metrology, quality inspection, production monitoring, and digital factory
+  solutions. The Nexus Developer Portal provides REST APIs authenticated via
+  OAuth 2.0, enabling manufacturers and third-party developers to build
+  connected, collaborative workflows integrating measurement data, quality
+  processes, and industrial automation across the smart factory lifecycle.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/hexagon/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Manufacturing
+  - Metrology
+  - Quality Inspection
+  - Digital Factory
+  - Production Monitoring
+  - Industrial IoT
+  - Smart Manufacturing
+apis:
+  - aid: hexagon:nexus-api
+    name: Hexagon Nexus API
+    description: >-
+      REST APIs for the Nexus digital reality platform enabling manufacturers to
+      build connected workflows integrating metrology, quality inspection, and
+      production monitoring data. All endpoints are authenticated via OAuth 2.0
+      and route through an Application Gateway for rate limiting, quota
+      management, logging, and analytics.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://nexus.hexagon.com/developerportal
+    baseURL: https://nexus.hexagon.com
+    tags:
+      - Manufacturing
+      - Metrology
+      - Quality
+      - Production
+    properties:
+      - type: Documentation
+        url: https://nexus.hexagon.com/documentationcenter/en-US/
+      - type: OpenAPI
+        url: https://nexus.hexagon.com/developerportal
+  - aid: hexagon:hxgn-eam-api
+    name: HxGN EAM REST API
+    description: >-
+      Enterprise Asset Management REST API providing programmatic access to
+      asset lifecycle data including equipment management, work orders,
+      preventive maintenance, document attachments, and service requests.
+      Defined in OpenAPI 3 and available through the Hexagon documentation
+      portal.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189
+    baseURL: https://docs.hexagonali.com
+    tags:
+      - Enterprise Asset Management
+      - Maintenance
+      - Equipment
+    properties:
+      - type: Documentation
+        url: https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189
+  - aid: hexagon:hxgn-sdx-api
+    name: HxGN SDx API Services
+    description: >-
+      Smart Digital eXchange API Services enabling integration with Hexagon's
+      engineering data management platform for plant design, document control,
+      and digital twin workflows in process and power industries.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413
+    baseURL: https://docs.hexagonali.com
+    tags:
+      - Digital Twin
+      - Engineering Data
+      - Plant Design
+    properties:
+      - type: Documentation
+        url: https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413
+common:
+  - type: Website
+    url: https://hexagon.com
+  - type: Documentation
+    url: https://nexus.hexagon.com/documentationcenter/en-US/
+  - type: GitHubOrg
+    url: https://github.com/hexagonab
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/hexagon-ab
+  - type: Blog
+    url: https://blog.manufacturing.hexagon.com/
+  - type: Pricing
+    url: https://hexagon.com/products/product-groups/nexus
+  - type: StatusPage
+    url: https://status.hxdr.app/
+  - type: X
+    url: https://x.com/hexagonab
+  - type: Plans
+    url: plans/hexagon-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/hexagon-rate-limits.yml
+  - type: FinOps
+    url: finops/hexagon-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

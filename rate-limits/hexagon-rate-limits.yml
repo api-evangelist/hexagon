@@ -1,0 +1,38 @@
+name: Hexagon API Rate Limits
+description: >-
+  Hexagon Nexus platform routes all API calls through an Application Gateway
+  that enforces rate limiting and quota management. Specific numeric thresholds
+  are not publicly disclosed and are configured per-customer as part of the
+  enterprise agreement. All endpoints require OAuth 2.0 authentication — there
+  are no anonymous (unauthenticated) endpoints.
+url: https://nexus.hexagon.com/home/support/security-faq/
+created: '2026-06-13'
+modified: '2026-06-13'
+rateLimits:
+  - api: Hexagon Nexus API
+    scope: All endpoints
+    enforcement: Application Gateway
+    description: >-
+      All Nexus API calls pass through an Application Gateway that enforces
+      rate limiting and quota management. Limits are applied per authenticated
+      SSO token and are configured as part of enterprise agreements.
+    authentication: OAuth 2.0 (Nexus SSO token required — no anonymous endpoints)
+    gateway: Application Gateway (rate-limiting, quota management, logging, analytics)
+    monitoring: 24x7 SOC monitoring for threat detection
+    rbac: Role-based access control (RBAC) applied per API consumer
+    publicLimits: not-disclosed
+    notes: >-
+      Specific rate limit values (requests per second, daily quotas) are not
+      publicly published. Contact Hexagon sales or the support center for
+      limits applicable to your enterprise agreement.
+    supportUrl: https://supportcenter.nexus.hexagon.com/service/s/?language=en_US
+  - api: HxGN EAM REST API
+    scope: All endpoints
+    enforcement: Server-side
+    authentication: ION API / enterprise SSO
+    publicLimits: not-disclosed
+    notes: >-
+      HxGN EAM REST API rate limits are managed at the deployment level (cloud
+      or on-premise) and are not publicly specified. Limits depend on
+      deployment configuration and enterprise licensing.
+    documentationUrl: https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189

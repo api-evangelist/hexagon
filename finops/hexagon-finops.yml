@@ -1,0 +1,74 @@
+name: Hexagon FinOps
+description: >-
+  Financial operations guidance for Hexagon manufacturing intelligence APIs and
+  the Nexus platform. Hexagon delivers enterprise B2B solutions with custom
+  pricing negotiated per contract. There are no public self-serve tiers or
+  pay-as-you-go API pricing models. Cost management is handled through
+  enterprise license agreements with Hexagon's sales organization.
+url: https://hexagon.com/company/contact-us
+created: '2026-06-13'
+modified: '2026-06-13'
+pricingModel: enterprise-contract
+selfServe: false
+freeTrierAvailable: false
+publicPricing: false
+costDrivers:
+  - name: Platform (Nexus)
+    description: >-
+      Nexus digital reality platform costs are driven by the number of users,
+      connected products/modules, data volume ingested, and Azure cloud
+      infrastructure consumption. Built on Microsoft Azure, costs reflect
+      cloud hosting and compute resources allocated per customer.
+    variables:
+      - User seat count
+      - Module selection (metrology, quality, production, engineering)
+      - Cloud compute and storage (Azure)
+      - Number of API integrations / connected applications
+      - Support tier
+  - name: HxGN EAM
+    description: >-
+      Enterprise Asset Management costs depend on deployment model (cloud vs.
+      on-premise), number of licensed users, and selected functional modules
+      (maintenance, inventory, procurement, document management).
+    variables:
+      - Deployment model (cloud SaaS vs. on-premise)
+      - Licensed user count
+      - Module selection
+      - Implementation and professional services
+  - name: HxGN SDx
+    description: >-
+      Smart Digital eXchange costs are driven by project scale, number of
+      engineering documents managed, user licenses, and integration complexity
+      with third-party plant design systems.
+    variables:
+      - Document and data volume
+      - User licenses
+      - Integration scope
+      - Professional services / implementation
+optimization:
+  - tip: Negotiate enterprise agreements that include API access rights explicitly
+    detail: >-
+      Hexagon's enterprise contracts may or may not include developer portal
+      and API access. Ensure API access, rate limit quotas, and developer
+      sandbox environments are scoped into the contract before signing.
+  - tip: Leverage Nexus sandbox environments for development before production use
+    detail: >-
+      Hexagon Nexus Developer Portal provides sandbox environments to test
+      integrations without incurring production API usage costs. Use sandbox
+      extensively during development to avoid unexpected production charges.
+  - tip: Monitor API usage via Application Gateway analytics
+    detail: >-
+      The Nexus Application Gateway logs and provides analytics on API usage.
+      Use these metrics to track consumption against contracted quotas and
+      forecast future usage to inform renewal negotiations.
+  - tip: Bundle multiple Hexagon products for volume pricing
+    detail: >-
+      Hexagon offers integrated suites spanning metrology, EAM, SDx, and Nexus.
+      Consolidating purchases with a single Hexagon enterprise agreement often
+      yields better pricing than purchasing products individually.
+procurement:
+  contact: https://hexagon.com/company/contact-us
+  notes: >-
+    All purchasing is handled through Hexagon's regional sales teams. No
+    self-serve checkout or trial tiers are available for Hexagon's
+    manufacturing intelligence APIs or the Nexus platform.

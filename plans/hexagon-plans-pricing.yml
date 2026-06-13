@@ -1,0 +1,66 @@
+name: Hexagon Plans and Pricing
+description: >-
+  Hexagon provides enterprise manufacturing intelligence and digital reality
+  solutions with pricing tailored to organization size, product suite, and
+  deployment model. The Nexus platform is available as a cloud service built on
+  Microsoft Azure, designed to be accessible for companies of all sizes. Specific
+  API and platform pricing requires direct engagement with Hexagon's sales team
+  for a custom quote based on use case, user count, and module selection.
+url: https://hexagon.com/products/product-groups/nexus
+created: '2026-06-13'
+modified: '2026-06-13'
+plans:
+  - name: Nexus Platform — Enterprise
+    description: >-
+      Cloud-based digital reality platform for large manufacturers requiring
+      full integration across metrology, quality, production, and engineering
+      data workflows. Includes access to Nexus APIs via the Developer Portal,
+      OAuth 2.0 SSO authentication, Application Gateway rate limiting, and
+      integration with Microsoft Azure infrastructure.
+    url: https://hexagon.com/products/product-groups/nexus
+    contact: https://hexagon.com/company/contact-us
+    pricingModel: custom
+    pricingPage: https://hexagon.com/products/product-groups/nexus
+    features:
+      - Nexus Developer Portal API access
+      - OAuth 2.0 / SSO authentication
+      - Application Gateway (rate limiting, quota management)
+      - API metrics logging and analytics
+      - Role-based access control (RBAC)
+      - 24x7 SOC monitoring
+      - Microsoft Azure cloud infrastructure
+      - SDKs and sandbox environments
+      - Nexus Documentation Center
+  - name: HxGN EAM — Enterprise Asset Management
+    description: >-
+      Enterprise Asset Management platform with REST API (OpenAPI 3) for
+      programmatic integration of asset lifecycle, maintenance, work orders,
+      and equipment data. Pricing is per-module and deployment model
+      (cloud or on-premise).
+    url: https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189
+    contact: https://hexagon.com/company/contact-us
+    pricingModel: custom
+    features:
+      - REST API (OpenAPI 3 specification)
+      - Equipment management
+      - Work order and preventive maintenance
+      - Document attachment management
+      - ION API / Swagger integration
+  - name: HxGN SDx — Smart Digital eXchange
+    description: >-
+      Engineering data management API services for process and power industries,
+      covering plant design, document control, and digital twin integration.
+      Pricing is based on deployment scale and module configuration.
+    url: https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413
+    contact: https://hexagon.com/company/contact-us
+    pricingModel: custom
+    features:
+      - REST API services configuration
+      - Digital twin integration
+      - Plant design document control
+      - Engineering data management
+notes: >-
+  All Hexagon API and platform pricing is negotiated directly with Hexagon's
+  sales team. No self-serve pricing tiers are publicly published. Hexagon
+  serves industrial manufacturers, utilities, and process industries globally
+  with deployment options ranging from cloud (Azure) to on-premise.
