@@ -1,0 +1,67 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://hexagon.com",
+  "name": "Hexagon",
+  "description": "Hexagon is a global leader in digital reality solutions, combining sensor, software and autonomous technologies. Through the Nexus platform and product APIs, Hexagon delivers manufacturing intelligence capabilities spanning metrology, quality inspection, production monitoring, and digital factory solutions.",
+  "url": "https://hexagon.com",
+  "sameAs": [
+    "https://github.com/hexagonab",
+    "https://www.linkedin.com/company/hexagon-ab",
+    "https://x.com/hexagonab"
+  ],
+  "knowsAbout": [
+    "Manufacturing Intelligence",
+    "Metrology",
+    "Quality Inspection",
+    "Digital Factory",
+    "Production Monitoring",
+    "Industrial IoT",
+    "Smart Manufacturing",
+    "Enterprise Asset Management",
+    "Digital Twin",
+    "Engineering Data Management"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Hexagon APIs",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Hexagon Nexus API",
+        "description": "REST APIs for the Nexus digital reality platform enabling manufacturers to build connected workflows integrating metrology, quality inspection, and production monitoring data. Authenticated via OAuth 2.0.",
+        "url": "https://nexus.hexagon.com/developerportal"
+      },
+      {
+        "@type": "Offer",
+        "name": "HxGN EAM REST API",
+        "description": "Enterprise Asset Management REST API providing programmatic access to asset lifecycle data including equipment management, work orders, preventive maintenance, document attachments, and service requests.",
+        "url": "https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189"
+      },
+      {
+        "@type": "Offer",
+        "name": "HxGN SDx API Services",
+        "description": "Smart Digital eXchange API Services enabling integration with Hexagon's engineering data management platform for plant design, document control, and digital twin workflows.",
+        "url": "https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413"
+      }
+    ]
+  },
+  "subjectOf": [
+    {
+      "@type": "WebSite",
+      "name": "Hexagon Manufacturing Intelligence Blog",
+      "url": "https://blog.manufacturing.hexagon.com/"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Hexagon Nexus Developer Portal",
+      "url": "https://nexus.hexagon.com/developerportal"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Hexagon Documentation Center",
+      "url": "https://nexus.hexagon.com/documentationcenter/en-US/"
+    }
+  ],
+  "mainEntityOfPage": "https://raw.githubusercontent.com/api-evangelist/hexagon/refs/heads/main/apis.yml"
+}
