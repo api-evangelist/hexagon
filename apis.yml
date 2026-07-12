@@ -79,6 +79,8 @@ apis:
       - type: Documentation
         url: https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413
 common:
+  - type: DomainSecurity
+    url: security/hexagon-domain-security.yml
   - type: Website
     url: https://hexagon.com
   - type: Documentation
