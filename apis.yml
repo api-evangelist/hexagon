@@ -9,6 +9,17 @@ description: >-
   OAuth 2.0, enabling manufacturers and third-party developers to build
   connected, collaborative workflows integrating measurement data, quality
   processes, and industrial automation across the smart factory lifecycle.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: approval
