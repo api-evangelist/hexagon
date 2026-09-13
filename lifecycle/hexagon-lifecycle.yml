@@ -1,0 +1,420 @@
+generated: '2026-09-13'
+method: derived
+source: graphql/hexagon-ab-hxdr.graphql, introspected from https://hxdr.app/graphql on 2026-09-13; plus
+  https://status.hxdr.app/ (HTTP 200) and https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/usage-based-account-information.md
+  (HTTP 200).
+applies_to: hexagon-ab:geocloud-graphql
+versioning:
+  scheme: in-schema V-suffix on field names; no URL, header or date version
+  current_version: null
+  current_version_note: The API publishes no version identifier. The docs site stamps its own content
+    version (observed 2026.09.07 in the frontmatter of every .md page) but that is the documentation
+    build, not the API.
+  gateway_version_observed: 1.36.0 (from errors[].extensions.gateway)
+deprecation_policy:
+  published_policy_page: null
+  mechanism: GraphQL @deprecated(reason:) carried in the contract itself
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  strength: strong-in-contract, undocumented-in-prose
+  detail: This is an unusually disciplined deprecation practice with no policy page behind it. 104 schema
+    elements are marked @deprecated and 80 of them carry an explicit calendar termination date inside
+    the deprecation reason, most also naming the replacement field. The oldest planned terminations
+    are 2025 and the furthest out is 2028-07-31, so the provider is giving multi-year notice in machine-readable
+    form. What is missing is any RFC 8594 Sunset or Deprecation response header and any human-readable
+    deprecation policy page, so a consumer who does not re-introspect the schema will never be told.
+  anomaly: 12 elements are already past their stated termination date and are still in the live schema
+    as of 2026-09-13, the earliest being 2025-06-30. One stated date, 2025-06-31 on AssetOutput.jobSummary,
+    is not a real calendar date.
+  deprecated_element_count: 104
+  with_termination_date: 80
+  past_due_count: 12
+  by_year:
+    '2025': 7
+    '2026': 42
+    '2027': 12
+    '2028': 19
+deprecations:
+- type: Mutation
+  field: unshareGroupedAsset
+  termination: '2025-06-30'
+  reason: Use removeSharing to remove a specific sharing code, termination planned for 2025-06-30
+- type: GroupedAssetOutput
+  field: sharingCode
+  termination: '2025-06-30'
+  reason: Returns only the first sharing code without expiry date - replaced by sharingCodes , termination
+    planned for 2025-06-30
+- type: AssetOutput
+  field: jobSummary
+  termination: '2025-06-31'
+  reason: No longer supported, see https://docs.hxdr.app/featuredoc/_quickstart/pipelines/status/status-retrieval,
+    termination planned for 2025-06-31
+- type: Mutation
+  field: removeUserFlag
+  termination: '2025-09-01'
+  reason: No longer supported. UserFlagInput.valid can be set to false in some cases, but the flag cannot
+    be completely removed. Termination planned for 2025-09-01
+- type: UserFlagEnum
+  enum_value: LATEST_TOS_CONSENT
+  termination: '2025-09-01'
+  reason: Use TOS_CONSENT instead. Termination planned for 2025-09-01
+- type: Query
+  field: getProjectMember
+  termination: '2025-09-30'
+  reason: No longer supported, query ProjectMembers on the ProjectOutput, termination planned for 2025-09-30
+- type: Mutation
+  field: addExternalUserToProject
+  termination: '2025-12-31'
+  reason: No longer supported, in favour of mutation addExternalUserToProjectV2, termination planned
+    for 2025-12-31
+- type: Query
+  field: projects
+  termination: '2026-01-31'
+  reason: No longer supported, in favour of query `projectsV2`, termination planned for 2026-01-31
+- type: GroupedAssetGeoreferenceOutput
+  field: artifacts
+  termination: '2026-02-01'
+  reason: No longer supported, in favor of `visibleArtifacts`. Termination planned for 2026-02-01.
+- type: Mutation
+  field: signupFromInviteV2
+  termination: '2026-02-18'
+  reason: No longer supported, in favour of mutation signupFromInviteV3, termination planned for 2026-02-18
+- type: Mutation
+  field: signupV3
+  termination: '2026-02-18'
+  reason: No longer supported,in favour of mutation signupV4, termination planned for 2026-02-18
+- type: ProcessingPipelineInfoOutput
+  field: errors
+  termination: '2026-07-01'
+  reason: Use errorsV2 instead. Termination planned for 2026-07-01.
+- type: Query
+  field: provideTemporaryAccessToEntities
+  termination: '2026-09-30'
+  reason: Support users automatically get access on demand. There is no need to use this anymore. Termination
+    planned for 2026-09-30.
+- type: Query
+  field: getSubscriptionTiersV2
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Query
+  field: getSubscriptionQuotationV2
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Query
+  field: getAllSubscriptionsV2
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Query
+  field: getAllSubscriptionOrdersV2
+  termination: '2026-09-30'
+  reason: Was never used or implemented, termination planned for 2026-09-30
+- type: Query
+  field: getAllSubscriptionInvoicesV2
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Query
+  field: tokenWallet
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Query
+  field: tokensTransactions
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Mutation
+  field: confirmSubscriptionOrderV2
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Mutation
+  field: buySubscriptionV2
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Mutation
+  field: buySubscriptionV3
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Mutation
+  field: cancelCurrentSubscriptionV2
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Mutation
+  field: stopPendingSubscriptionDowngrade
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Mutation
+  field: stopPendingSubscriptionCancellation
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: Mutation
+  field: refundTokens
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: PlatformCapabilityEnum
+  enum_value: CAN_PERSIST_ARTIFACT
+  termination: '2026-09-30'
+  reason: No longer supported, termination planned for 2026-09-30
+- type: SubscriptionProviderTypeEnum
+  enum_value: STRIPE
+  termination: '2026-09-30'
+  reason: Stripe subscriptions are no longer supported, termination planned for 2026-09-30
+- type: SubscriptionLimitEnum
+  enum_value: SEATS
+  termination: '2026-09-30'
+  reason: We no longer have this limit, termination planned for 2026-09-30
+- type: SubscriptionLimitEnum
+  enum_value: STREAMING
+  termination: '2026-09-30'
+  reason: We no longer have this limit, termination planned for 2026-09-30
+- type: SubscriptionLimitEnum
+  enum_value: DOWNLOAD
+  termination: '2026-09-30'
+  reason: We no longer have this limit, termination planned for 2026-09-30
+- type: SubscriptionLimitEnum
+  enum_value: TOKENS
+  termination: '2026-09-30'
+  reason: We no longer have this limit, termination planned for 2026-09-30
+- type: SubscriptionLimitEnum
+  enum_value: IS_DEVICE_UPLOAD_LIMITED
+  termination: '2026-09-30'
+  reason: We no longer have this limit, termination planned for 2026-09-30
+- type: SubscriptionLimitEnum
+  enum_value: HAS_EXTERNAL_COLLABORATION
+  termination: '2026-09-30'
+  reason: We no longer have this limit, termination planned for 2026-09-30
+- type: SubscriptionLimitEnum
+  enum_value: HAS_PUBLIC_SHARING
+  termination: '2026-09-30'
+  reason: We no longer have this limit, termination planned for 2026-09-30
+- type: SceneNodeAssetReferenceOutput
+  field: visibleArtifactPayloads
+  termination: '2026-09-30'
+  reason: No longer supported, in favour of field `visibleArtifactPayloadsV2`, termination planned for
+    2026-09-30.
+- type: GroupedAssetGeoreferenceOutput
+  field: visibleArtifactPayloads
+  termination: '2026-09-30'
+  reason: No longer supported, in favour of field `visibleArtifactPayloadsV2`, termination planned for
+    2026-09-30.
+- type: ProcessingUsageOutput
+  field: duration
+  termination: '2026-10-31'
+  reason: No longer supported, in favour of durationV2 , termination planned for 2026-10-31
+- type: AddressHspcOutput
+  field: processingPipelineInfo
+  termination: '2026-12-01'
+  reason: Use processingPipelineInfoV2 and generatedPipelineArtifactInfo instead. Termination planned
+    for 2026-12-01.
+- type: AddressLtsOutput
+  field: processingPipelineInfo
+  termination: '2026-12-01'
+  reason: Use processingPipelineInfoV2 and generatedPipelineArtifactInfo instead. Termination planned
+    for 2026-12-01.
+- type: AddressOgc3DOutput
+  field: processingPipelineInfo
+  termination: '2026-12-01'
+  reason: Use processingPipelineInfoV2 and generatedPipelineArtifactInfo instead. Termination planned
+    for 2026-12-01.
+- type: AddressCubemapJsonOutput
+  field: processingPipelineInfo
+  termination: '2026-12-01'
+  reason: Use processingPipelineInfoV2 and generatedPipelineArtifactInfo instead. Termination planned
+    for 2026-12-01.
+- type: AddressDownloadableOutput
+  field: processingPipelineInfo
+  termination: '2026-12-01'
+  reason: Use processingPipelineInfoV2 and generatedPipelineArtifactInfo instead. Termination planned
+    for 2026-12-01.
+- type: AddressWmsOutput
+  field: processingPipelineInfo
+  termination: '2026-12-01'
+  reason: Use processingPipelineInfoV2 and generatedPipelineArtifactInfo instead. Termination planned
+    for 2026-12-01.
+- type: AddressWmtsOutput
+  field: processingPipelineInfo
+  termination: '2026-12-01'
+  reason: Use processingPipelineInfoV2 and generatedPipelineArtifactInfo instead. Termination planned
+    for 2026-12-01.
+- type: AddressWfsOutput
+  field: processingPipelineInfo
+  termination: '2026-12-01'
+  reason: Use processingPipelineInfoV2 and generatedPipelineArtifactInfo instead. Termination planned
+    for 2026-12-01.
+- type: ArtifactItemOutput
+  field: size
+  termination: '2026-12-31'
+  reason: Use sizeV2 instead. Termination planned for 2026-12-31
+- type: ScenesOutput
+  field: appliedSceneTypeFilter
+  termination: '2026-12-31'
+  reason: Use appliedFilters.bySceneType instead, termination planned for 2026-12-31
+- type: Query
+  field: processingTokensQuotation
+  termination: '2027-03-31'
+  reason: Pipelines no longer consume tokens. Termination planned for 2027-03-31.
+- type: Query
+  field: loadUserCacheAsMine
+  termination: '2027-03-31'
+  reason: Support users automatically get access on demand. To list all projects a users has access
+    to, the admin panel should expose `projectsOfUser` instead. It's recommended to also expose `projectsOfAccount`
+    and `projectsOfTenant`. This query will be terminated once the usage in the admin panel is removed
+    or at the latest 2027-03-31.
+- type: Query
+  field: searchLabels
+  termination: '2027-03-31'
+  reason: No longer supported, in favour of query `searchLabelsV2`, termination planned for 2027-03-31
+- type: Mutation
+  field: triggerHSPCClipperProcessingPipeline
+  termination: '2027-03-31'
+  reason: in favor of triggerShopProcessingPipeline, termination planned for 2027-03-31
+- type: ProcessingPipelineName
+  enum_value: LUCIAD_VECTOR_OR_RASTER_TO_WMS
+  termination: '2027-03-31'
+  reason: No longer supported, termination planned for 2027-03-31.
+- type: ProcessingPipelineName
+  enum_value: LUCIAD_VECTOR_OR_RASTER_TO_WMTS
+  termination: '2027-03-31'
+  reason: No longer supported, termination planned for 2027-03-31.
+- type: ProcessingPipelineName
+  enum_value: LUCIAD_FUSION_COVERAGE_TO_LTS
+  termination: '2027-03-31'
+  reason: No longer supported, termination planned for 2027-03-31.
+- type: ScanningDeviceType
+  enum_value: BLK2GO_PULSE
+  termination: '2027-03-31'
+  reason: deprecated in favor of BLK2GO, termination planned for 2027-03-31.
+- type: ScanningDeviceType
+  enum_value: BLK360_G1
+  termination: '2027-03-31'
+  reason: deprecated in favor of BLK360, termination planned for 2027-03-31.
+- type: Query
+  field: getArtifactsInAsset
+  termination: '2027-09-30'
+  reason: No longer supported, in favour of `artifactsV3` on `AssetOutput`, termination planned for
+    2027-09-30
+- type: AssetOutput
+  field: artifactsV2
+  termination: '2027-09-30'
+  reason: No longer supported, in favour of query `artifactsV3`, termination planned for 2027-09-30
+- type: SimpleUserProfileOutput
+  field: applicationRoles
+  termination: '2027-09-31'
+  reason: This was never filled in, no alternative provided. Termination planned for 2027-09-31
+- type: Query
+  field: availableProcessingPipelines
+  termination: '2028-03-31'
+  reason: Use availableProcessingPipelines field on AssetOutput. Termination planned for 2028-03-31.
+- type: Mutation
+  field: signupFromInviteV3
+  termination: '2028-03-31'
+  reason: No longer supported, in favour of signupFromInviteV4, termination planned for 2028-03-31
+- type: Mutation
+  field: signupV4
+  termination: '2028-03-31'
+  reason: No longer supported, in favour of signupV5, termination planned for 2028-03-31
+- type: Mutation
+  field: upgradeAsset
+  termination: '2028-03-31'
+  reason: No longer supported, in favour of mutation upgradeAssetV2, termination planned for 2028-03-31
+- type: AnnotationConflictTypeEnum
+  enum_value: CATEGORY_DIFFERENT_NAME_CONFLICT
+  termination: '2028-03-31'
+  reason: No longer supported, termination planned for 2028-03-31.
+- type: AnnotationConflictTypeEnum
+  enum_value: CATEGORY_SAME_NAME_CONFLICT
+  termination: '2028-03-31'
+  reason: No longer supported, termination planned for 2028-03-31.
+- type: AnnotationConflictTypeEnum
+  enum_value: CATEGORY_SAME_NAME_AS_FIELD_CONFLICT
+  termination: '2028-03-31'
+  reason: No longer supported, termination planned for 2028-03-31.
+- type: Mutation
+  field: createArtifact
+  termination: '2028-07-31'
+  reason: No longer supported, in favour of mutation createArtifactV2 with an ASSET parent, termination
+    planned for 2028-07-31
+- type: Query
+  field: accountMembers
+  termination: '2028-09-30'
+  reason: Termination planned for 2028-09-30 in favor of accountMembersV2.
+- type: ServiceTypeEnum
+  enum_value: WMS
+  termination: '2028-09-30'
+  reason: No longer supported, termination planned for 2028-09-30
+- type: ServiceTypeEnum
+  enum_value: LTS
+  termination: '2028-09-30'
+  reason: No longer supported, termination planned for 2028-09-30
+- type: ServiceTypeEnum
+  enum_value: WMTS
+  termination: '2028-09-30'
+  reason: No longer supported, termination planned for 2028-09-30
+- type: SavedFormatEnum
+  enum_value: WMS
+  termination: '2028-09-30'
+  reason: No longer supported, termination planned for 2028-09-30
+- type: SavedFormatEnum
+  enum_value: WMTS
+  termination: '2028-09-30'
+  reason: No longer supported, termination planned for 2028-09-30
+- type: SavedFormatEnum
+  enum_value: LTS
+  termination: '2028-09-30'
+  reason: No longer supported, termination planned for 2028-09-30
+- type: FloorPlanOutput
+  field: artifact
+  termination: '2028-09-30'
+  reason: No longer supported, in favour of field `artifactV2`, termination planned for 2028-09-30.
+- type: SceneNodeAssetReferenceOutput
+  field: visibleArtifacts
+  termination: '2028-09-30'
+  reason: No longer supported, in favour of field `visibleArtifactPayloadsV2`, termination planned for
+    2028-09-30.
+- type: GroupedAssetGeoreferenceOutput
+  field: visibleArtifacts
+  termination: '2028-09-30'
+  reason: No longer supported, in favour of field `visibleArtifactPayloadsV2`, termination planned for
+    2028-09-30.
+- type: SceneGroupNodeOutput
+  field: visible
+  termination: '2028-12-31'
+  reason: Group node visibility will no longer be used, to be replaced by making children visible or
+    invisible, termination planned for 2028-12-31.
+status_page:
+  url: https://status.hxdr.app/
+  title: Hexagon GeoCloud Status
+  provider: Atlassian Statuspage
+  http_status: 200
+  machine_readable:
+  - path: /api/v2/summary.json
+    status: 200
+  - path: /api/v2/status.json
+    status: 200
+  - path: /history.rss
+    status: 200
+  note: A real incident-history feed, not a static badge. Incident titles include dated Single Sign-On
+    login failures.
+sla:
+  published: false
+  note: No public SLA or uptime commitment was found on any Hexagon GeoCloud or Leica Geosystems page
+    in this pass.
+termination_and_data_retention:
+  stated: true
+  detail: '"If you cancel before the end of your contract, you will retain access to the product through
+    the end of the original contract date, after which your access will be removed. No refunds are made
+    for unused time."'
+  source: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/usage-based-account-information.md
+product_rename:
+  note: HxDR and Reality Cloud Studio were renamed to Hexagon GeoCloud during 2026. The release-note
+    series changes name mid-year - entries through April 13 2026 are titled "Reality Cloud Studio" and
+    entries from April 20 2026 onward are titled "Hexagon GeoCloud". hxdr.com now 301s to geocloud.hexagon.com,
+    while the API host, the app host and the status page all still carry the hxdr name. The former documentation
+    host docs.hxdr.app 302s to /login and its published /featuredoc tree now 404s; documentation moved
+    to rcdocs.leica-geosystems.com.
+  evidence:
+  - url: https://hxdr.com/
+    status: 200
+    final: https://geocloud.hexagon.com/
+  - url: https://docs.hxdr.app/featuredoc
+    status: 404
+  - url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/2026-hexagon-geocloud-release-notes.md
+    status: 200

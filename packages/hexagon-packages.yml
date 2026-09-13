@@ -1,0 +1,46 @@
+generated: '2026-09-13'
+method: searched
+source: >-
+  registry.npmjs.org search and direct package lookups; pypi.org/pypi/<pkg>/json;
+  plus the Hexagon GeoCloud and Leica Geosystems documentation surface
+  (https://rcdocs.leica-geosystems.com/llms.txt, 2,347 indexed documents, searched
+  for SDK/client/library references).
+package_count: 0
+official_count: 0
+packages: []
+detail: >-
+  No first-party Hexagon client library was found in any public package registry.
+  Hexagon publishes no SDK for the GeoCloud GraphQL API - a consumer writes its own
+  GraphQL client against graphql/hexagon-ab-hxdr.graphql. The desktop-side
+  integrations Hexagon does ship (CloudWorx plugins, Cyclone 3DR, the GeoCloud
+  desktop app, LGS Converter) are licensed installers distributed from Hexagon's own
+  download pages, not registry packages, and LuciadRIA - the JavaScript mapping SDK
+  that shows up throughout the processing-pipeline enum values - is a commercial
+  Hexagon product delivered under licence rather than from npm.
+false_positives_checked:
+  - name: '@hexagon/*'
+    registry: npm
+    verdict: not-hexagon-ab
+    note: >-
+      The npm @hexagon scope (@hexagon/base64, croner) belongs to an unrelated
+      individual publisher who uses "hexagon" as a handle. Not a Hexagon AB
+      surface.
+  - name: 'felipecarrillo100/* (ria-toolbox, ria-wfststore, openapifeature, hxdrassetupload)'
+    registry: npm
+    verdict: third-party
+    note: >-
+      A set of LuciadRIA and HxDR helper packages published by an individual
+      developer, not from a Hexagon-controlled account and not endorsed on any
+      Hexagon page found in this pass. Recorded here so a later run does not mistake
+      them for first-party.
+registries_checked:
+  - registry: npm
+    result: none
+  - registry: pypi
+    result: none
+  - registry: maven-central
+    result: not-probed
+    note: Not probed - no evidence anywhere in the docs points at a JVM client.
+  - registry: nuget
+    result: not-probed
+    note: Not probed - no evidence anywhere in the docs points at a .NET client.

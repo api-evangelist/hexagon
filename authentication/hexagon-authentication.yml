@@ -1,0 +1,151 @@
+generated: '2026-09-13'
+method: probed
+source: >-
+  https://hxauth.com/auth/realms/geo-hxdr-prod/.well-known/openid-configuration
+  (HTTP 200, saved verbatim to
+  well-known/hexagon-ab-hxauth-openid-configuration.json);
+  https://geocloud.hexagon.com/.well-known/oauth-authorization-server (HTTP 200);
+  https://geocloud.hexagon.com/.well-known/oauth-protected-resource (HTTP 200);
+  plus live anonymous calls to https://hxdr.app/graphql.
+docs: https://geocloud.hexagon.com/security-compliance/
+summary: >-
+  Two separate, unrelated authorization surfaces. The GeoCloud product API is
+  protected by a Keycloak OpenID Connect realm on a dedicated identity host
+  (hxauth.com); the GeoCloud web property's MCP endpoint is protected by a small
+  self-hosted OAuth 2.1 server on geocloud.hexagon.com. They share no issuer, no
+  scopes and no token format.
+schemes:
+  - id: hxdr-oidc
+    applies_to: hexagon-ab:geocloud-graphql
+    type: openIdConnect
+    scheme: bearer
+    format: jwt
+    in: header
+    header: Authorization
+    prefix: Bearer
+    discovery: https://hxauth.com/auth/realms/geo-hxdr-prod/.well-known/openid-configuration
+    issuer: https://hxauth.com/auth/realms/geo-hxdr-prod
+    provider: Keycloak
+    realm: geo-hxdr-prod
+    client_id_observed: hxdr_sso
+    client_id_source: >-
+      Read from the public OIDC_CLIENT_ID field of the HxDR single-page
+      application's inline runtime config at https://hxdr.app/ - a public client
+      identifier, not a credential.
+    endpoints:
+      authorization: https://hxauth.com/auth/realms/geo-hxdr-prod/protocol/openid-connect/auth
+      token: https://hxauth.com/auth/realms/geo-hxdr-prod/protocol/openid-connect/token
+      userinfo: https://hxauth.com/auth/realms/geo-hxdr-prod/protocol/openid-connect/userinfo
+      jwks: https://hxauth.com/auth/realms/geo-hxdr-prod/protocol/openid-connect/certs
+      introspection: https://hxauth.com/auth/realms/geo-hxdr-prod/protocol/openid-connect/token/introspect
+      revocation: https://hxauth.com/auth/realms/geo-hxdr-prod/protocol/openid-connect/revoke
+      end_session: https://hxauth.com/auth/realms/geo-hxdr-prod/protocol/openid-connect/logout
+      device_authorization: https://hxauth.com/auth/realms/geo-hxdr-prod/protocol/openid-connect/auth/device
+      dynamic_client_registration: https://hxauth.com/auth/realms/geo-hxdr-prod/clients-registrations/openid-connect
+    grant_types_supported:
+      - authorization_code
+      - client_credentials
+      - implicit
+      - password
+      - refresh_token
+      - urn:ietf:params:oauth:grant-type:device_code
+      - urn:ietf:params:oauth:grant-type:jwt-bearer
+      - urn:ietf:params:oauth:grant-type:token-exchange
+      - urn:ietf:params:oauth:grant-type:uma-ticket
+      - urn:openid:params:grant-type:ciba
+    code_challenge_methods_supported:
+      - plain
+      - S256
+    token_endpoint_auth_methods_supported:
+      - private_key_jwt
+      - client_secret_basic
+      - client_secret_post
+      - tls_client_auth
+      - client_secret_jwt
+    id_token_signing_alg_values_supported:
+      - RS256
+      - RS384
+      - RS512
+      - PS256
+      - PS384
+      - PS512
+      - ES256
+      - ES384
+      - ES512
+      - EdDSA
+      - HS256
+      - HS384
+      - HS512
+    claims_supported:
+      - iss
+      - sub
+      - aud
+      - exp
+      - iat
+      - auth_time
+      - name
+      - given_name
+      - family_name
+      - preferred_username
+      - email
+      - acr
+      - azp
+      - nonce
+    logout:
+      backchannel_logout_supported: true
+      frontchannel_logout_supported: true
+    machine_to_machine: >-
+      client_credentials is advertised by the realm, and the realm carries a
+      dedicated service_account scope and an hxdr_be_system_user scope, so a
+      non-interactive integration path exists. Issuance of such a client is not
+      self-service from any public page found in this pass.
+    unauthenticated_behaviour:
+      probe: 'POST https://hxdr.app/graphql {"query":"{getUser{id}}"} with no Authorization header'
+      http_status: 200
+      graphql_error_code: UNAUTHENTICATED
+      message: You can not access the requested resource.
+      note: >-
+        GraphQL-idiomatic - transport stays 200 and the failure is carried in
+        errors[].extensions.code. Schema introspection itself is NOT gated and
+        succeeds anonymously.
+  - id: geocloud-mcp-oauth
+    applies_to: hexagon-ab:geocloud-mcp
+    type: oauth2
+    scheme: bearer
+    in: header
+    header: Authorization
+    prefix: Bearer
+    discovery: https://geocloud.hexagon.com/.well-known/oauth-authorization-server
+    protected_resource_metadata: https://geocloud.hexagon.com/.well-known/oauth-protected-resource
+    issuer: https://geocloud.hexagon.com
+    endpoints:
+      authorization: https://geocloud.hexagon.com/oauth/authorize
+      token: https://geocloud.hexagon.com/oauth/token
+      revocation: https://geocloud.hexagon.com/oauth/revoke
+    grant_types_supported:
+      - authorization_code
+      - refresh_token
+    response_types_supported:
+      - code
+    code_challenge_methods_supported:
+      - S256
+    token_endpoint_auth_methods_supported:
+      - none
+    scopes_supported:
+      - mcp
+    client_registration: >-
+      No registration_endpoint is advertised. The server sets
+      client_id_metadata_document_supported: true, so a client presents a
+      client-ID metadata document URL instead of pre-registering.
+    unauthenticated_behaviour:
+      probe: 'POST https://geocloud.hexagon.com/wp-json/mcp/mcp-oauth-server {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+      http_status: 401
+      message: MCP authentication required.
+gaps:
+  - >-
+    No public developer-facing authentication guide was found for the GeoCloud
+    GraphQL API. Everything recorded here was read from discovery documents and
+    live probes, not from a documentation page.
+  - >-
+    No API-key or personal-access-token mechanism exists in either surface; every
+    call requires an OAuth/OIDC bearer token.

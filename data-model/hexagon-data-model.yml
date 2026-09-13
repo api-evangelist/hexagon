@@ -1,0 +1,233 @@
+generated: '2026-09-13'
+method: derived
+source: graphql/hexagon-ab-hxdr.graphql (introspected from https://hxdr.app/graphql on 2026-09-13)
+applies_to: hexagon-ab:geocloud-graphql
+summary:
+  total_types: 1125
+  object_types: 540
+  input_types: 249
+  enums: 110
+  unions: 174
+  interfaces: 42
+  query_fields: 93
+  mutation_fields: 168
+  subscription_fields: 3
+containment_spine: Account -> Project -> root Folder -> nested Folders -> GroupedAsset -> Asset -> Artifact.
+  A GroupedAsset is the user-facing item in a folder; the Asset it wraps carries the geometry and the
+  Artifacts are the processed derivatives (OGC 3D Tiles, HSPC point cloud, LTS, COG, WMS/WMTS/WFS service
+  addresses, panoramic cubemaps, downloadable packages).
+id_convention: Opaque UUID strings on the id field. There are no typed or prefixed identifiers, so an
+  id carries no hint of what it points at - a client must track type alongside id.
+entities:
+- entity: ProjectOutput
+  field_count: 21
+  identifiers:
+  - id
+  relationships:
+  - kind: has_many
+    via: projectMembers
+    to: ProjectMembersResultOutput
+  - kind: has_one
+    via: rootFolder
+    to: FolderOutput
+  - kind: has_one
+    via: createdBy
+    to: SimpleUserProfileOutput
+  - kind: has_one
+    via: modifiedBy
+    to: SimpleUserProfileOutput
+  - kind: has_one
+    via: ownedBy
+    to: SimpleUserProfileOutput
+  - kind: has_one
+    via: labels
+    to: LabelsOutput
+- entity: FolderOutput
+  field_count: 16
+  identifiers:
+  - id
+  relationships:
+  - kind: has_one
+    via: project
+    to: ProjectOutput
+  - kind: has_one
+    via: parentFolder
+    to: FolderOutput
+  - kind: has_many
+    via: folders
+    to: FolderResultOutput
+  - kind: has_one
+    via: createdBy
+    to: SimpleUserProfileOutput
+  - kind: has_one
+    via: modifiedBy
+    to: SimpleUserProfileOutput
+  - kind: has_many
+    via: assets
+    to: GroupedAssetResultOutput
+- entity: GroupedAssetOutput
+  field_count: 33
+  identifiers:
+  - id
+  relationships:
+  - kind: has_many
+    via: labelAnnotations
+    to: LabelAnnotationOutput
+  - kind: has_many
+    via: measurementAnnotations
+    to: MeasurementAnnotationOutput
+  - kind: has_many
+    via: limitingBoxAnnotations
+    to: LimitingBoxAnnotationOutput
+  - kind: has_many
+    via: levels
+    to: LevelResultOutput
+  - kind: has_many
+    via: floorPlans
+    to: FloorPlanResultOutput
+  - kind: has_many
+    via: sharingCodes
+    to: SharingCodeOutput
+  - kind: has_one
+    via: asset
+    to: AssetOutput
+  - kind: has_one
+    via: folder
+    to: FolderOutput
+  - kind: has_one
+    via: createdBy
+    to: SimpleUserProfileOutput
+  - kind: has_one
+    via: modifiedBy
+    to: SimpleUserProfileOutput
+  - kind: has_one
+    via: bbox
+    to: AssetBBoxOutput
+  - kind: has_many
+    via: versions
+    to: AssetVersionResultOutput
+  - kind: has_one
+    via: groupedAssetGeoreferences
+    to: GroupedAssetGeoreferenceResultsOutput
+  - kind: has_many
+    via: tours
+    to: GroupedAssetTourResultOutput
+  - kind: has_one
+    via: viewpoint
+    to: ViewpointOutput
+  - kind: has_one
+    via: labels
+    to: LabelsOutput
+- entity: AssetOutput
+  field_count: 15
+  identifiers:
+  - id
+  - groupedAssetId
+  relationships:
+  - kind: has_one
+    via: availableProcessingPipelines
+    to: AvailableProcessingPipelinesUnion
+  - kind: has_one
+    via: anchorPoint
+    to: Point3DOutput
+  - kind: has_many
+    via: artifacts
+    to: ArtifactResultOutput
+  - kind: has_one
+    via: artifactsV2
+    to: ArtifactResultOutputV2
+  - kind: has_one
+    via: artifactsV3
+    to: ArtifactResultOutputV3
+  - kind: has_one
+    via: referencedBounds
+    to: ReferencedBoundsOutput
+  - kind: has_many
+    via: files
+    to: FileResultOutput
+  - kind: has_one
+    via: jobSummary
+    to: JobSummaryGQL
+  - kind: has_many
+    via: jobDetail
+    to: JobPage
+  - kind: has_one
+    via: primaryArtifact
+    to: ArtifactPayloadOutput
+  - kind: has_many
+    via: ucs
+    to: UcsOutput
+- entity: SceneOutput
+  field_count: 12
+  identifiers:
+  - id
+  relationships:
+  - kind: has_one
+    via: rootNode
+    to: SceneRootNodeOutput
+  - kind: has_one
+    via: project
+    to: ProjectOutput
+  - kind: has_one
+    via: geolocation
+    to: SceneGeolocationOutput
+  - kind: has_many
+    via: locks
+    to: SceneLockOutput
+  - kind: has_one
+    via: sceneGenerationStatus
+    to: SceneGenerationStatusUnion
+  - kind: has_one
+    via: createdBy
+    to: SimpleUserProfileOutput
+  - kind: has_one
+    via: modifiedBy
+    to: SimpleUserProfileOutput
+- entity: CartOutput
+  field_count: 13
+  identifiers:
+  - cartId
+  - userId
+  - orderId
+  relationships:
+  - kind: has_many
+    via: cartItems
+    to: CartItemOutput
+- entity: StreamingSubscriptionOutput
+  field_count: 13
+  identifiers:
+  - streamingSubscriptionUuid
+  - userUuid
+  relationships:
+  - kind: has_one
+    via: processingPipelineInfo
+    to: ProcessingPipelineInfoOutput
+- entity: EndpointOutput
+  field_count: 3
+  identifiers: []
+  relationships: []
+address_polymorphism:
+  interface: AddressInterface
+  note: 'The delivery address of any processed output is polymorphic. AddressInterface.endpoint is documented
+    in the schema as "the path of the object, needs to be appended to the domain of the backend to form
+    a complete URL", and concrete members select the delivery standard: AddressOgc3DOutput, AddressWmsOutput,
+    AddressWmtsOutput, AddressWfsOutput, AddressHspcOutput, AddressLtsOutput, AddressCogOutput, AddressCubemapJsonOutput,
+    AddressGeoJsonOutput, AddressPackOutput, AddressZipOutput, AddressDownloadableOutput. This is where
+    the OGC standards recorded in conformance/hexagon-ab-conformance.yml actually surface at runtime.'
+baselayers:
+  note: A parallel polymorphic family for map backdrops - BaselayerOgc3DOutput, BaselayerWmsOutput,
+    BaselayerWmtsOutput, BaselayerWfsOutput, BaselayerHspcOutput, BaselayerLtsOutput, BaselayerPanoramicOutput,
+    BaselayerUrlOutput - created by the matching mutations createOgc3dBaselayer, createWmsBaselayer,
+    createWmtsBaselayer and createWfsBaselayer, all gated on the CAN_EDIT_BASELAYER platform capability.
+commerce_subgraph:
+  note: A data-store shop is stitched into the same schema - CartOutput, CartItemOutput, quotation,
+    getCart, viewCart, getAllOrders, getOrder, getLastOrder, getActivePaymentCard, getStripePublicKey,
+    supportedCountries, validateAddressV2. Most of the subscription half is deprecated for 2026-09-30
+    with the reason "Stripe subscriptions are no longer supported".
+authorization_model:
+  note: Capability-based, expressed in mutation descriptions rather than in scopes - named platform
+    capabilities such as CAN_EDIT_BASELAYER and CAN_EDIT_STREAMING_SUBSCRIPTION gate individual mutations,
+    and project membership roles gate the project spine. None of these capability names appear in the
+    OAuth scope list at scopes/hexagon-ab-scopes.yml, so the token scope and the in-app permission are
+    two different systems.
+render: null

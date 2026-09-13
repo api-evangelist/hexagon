@@ -1,0 +1,90 @@
+generated: '2026-09-13'
+method: probed
+source: >-
+  scopes_supported read verbatim from
+  https://hxauth.com/auth/realms/geo-hxdr-prod/.well-known/openid-configuration
+  (HTTP 200) and from
+  https://geocloud.hexagon.com/.well-known/oauth-authorization-server (HTTP 200).
+docs: null
+docs_note: >-
+  No scope or permission reference page is published anywhere on the public
+  Hexagon GeoCloud or Leica Geosystems documentation surface. The descriptions
+  below are the standard OIDC/Keycloak meanings where the scope is a standard one,
+  and are marked undocumented where the scope is Hexagon-specific - the realm
+  publishes the names but no prose.
+authorization_servers:
+  - issuer: https://hxauth.com/auth/realms/geo-hxdr-prod
+    applies_to: hexagon-ab:geocloud-graphql
+    scopes:
+      - name: openid
+        description: Standard OIDC scope requesting an ID token.
+        standard: true
+      - name: profile
+        description: Standard OIDC claim set - name, given_name, family_name, preferred_username.
+        standard: true
+      - name: email
+        description: Standard OIDC email claim.
+        standard: true
+      - name: address
+        description: Standard OIDC address claim.
+        standard: true
+      - name: phone
+        description: Standard OIDC phone claim.
+        standard: true
+      - name: offline_access
+        description: Standard OIDC scope requesting a refresh token usable while the user is offline.
+        standard: true
+      - name: roles
+        description: Keycloak built-in scope adding realm and client role mappings to the token.
+        standard: false
+      - name: web-origins
+        description: Keycloak built-in scope adding allowed CORS origins to the token.
+        standard: false
+      - name: acr
+        description: Keycloak built-in scope carrying the authentication context class reference.
+        standard: false
+      - name: basic
+        description: Keycloak built-in scope carrying the minimal sub/auth_time claim set.
+        standard: false
+      - name: microprofile-jwt
+        description: Keycloak built-in scope emitting MicroProfile JWT claims (upn, groups).
+        standard: false
+      - name: user
+        description: Hexagon-specific. Undocumented.
+        standard: false
+        documented: false
+      - name: admin
+        description: Hexagon-specific. Undocumented - name implies elevated administrative access.
+        standard: false
+        documented: false
+      - name: service_account
+        description: >-
+          Hexagon-specific. Undocumented - name implies the non-interactive
+          client_credentials identity.
+        standard: false
+        documented: false
+      - name: hxdr_client_scope
+        description: Hexagon-specific HxDR client scope. Undocumented.
+        standard: false
+        documented: false
+      - name: hxdr_claims
+        description: Hexagon-specific HxDR claim set. Undocumented.
+        standard: false
+        documented: false
+      - name: hxdr_be_system_user
+        description: >-
+          Hexagon-specific HxDR back-end system-user scope. Undocumented - name
+          implies a server-to-server identity.
+        standard: false
+        documented: false
+  - issuer: https://geocloud.hexagon.com
+    applies_to: hexagon-ab:geocloud-mcp
+    scopes:
+      - name: mcp
+        description: >-
+          The single scope the GeoCloud MCP authorization server advertises,
+          required as the bearer scope for
+          https://geocloud.hexagon.com/wp-json/mcp/mcp-oauth-server.
+        standard: false
+        documented: false
+scope_count: 18

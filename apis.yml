@@ -1,14 +1,6 @@
 aid: hexagon
 name: Hexagon
-description: >-
-  Hexagon is a global leader in digital reality solutions, combining sensor,
-  software and autonomous technologies. Through the Nexus platform and product
-  APIs, Hexagon delivers manufacturing intelligence capabilities spanning
-  metrology, quality inspection, production monitoring, and digital factory
-  solutions. The Nexus Developer Portal provides REST APIs authenticated via
-  OAuth 2.0, enabling manufacturers and third-party developers to build
-  connected, collaborative workflows integrating measurement data, quality
-  processes, and industrial automation across the smart factory lifecycle.
+description: Hexagon is a global leader in digital reality solutions, combining sensor, software and autonomous technologies. Through the Nexus platform and product APIs, Hexagon delivers manufacturing intelligence capabilities spanning metrology, quality inspection, production monitoring, and digital factory solutions. The Nexus Developer Portal provides REST APIs authenticated via OAuth 2.0, enabling manufacturers and third-party developers to build connected, collaborative workflows integrating measurement data, quality processes, and industrial automation across the smart factory lifecycle.
 deliveryModel:
   model: saas
   open_source: false
@@ -38,94 +30,165 @@ created: '2026-06-13'
 modified: '2026-06-13'
 specificationVersion: '0.23'
 tags:
+- Manufacturing
+- Metrology
+- Quality Inspection
+- Digital Factory
+- Production Monitoring
+- Industrial IoT
+- Smart Manufacturing
+apis:
+- aid: hexagon:nexus-api
+  name: Hexagon Nexus API
+  description: REST APIs for the Nexus digital reality platform enabling manufacturers to build connected workflows integrating metrology, quality inspection, and production monitoring data. All endpoints are authenticated via OAuth 2.0 and route through an Application Gateway for rate limiting, quota management, logging, and analytics.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://nexus.hexagon.com/developerportal
+  baseURL: https://nexus.hexagon.com
+  tags:
   - Manufacturing
   - Metrology
-  - Quality Inspection
-  - Digital Factory
-  - Production Monitoring
-  - Industrial IoT
-  - Smart Manufacturing
-apis:
-  - aid: hexagon:nexus-api
-    name: Hexagon Nexus API
-    description: >-
-      REST APIs for the Nexus digital reality platform enabling manufacturers to
-      build connected workflows integrating metrology, quality inspection, and
-      production monitoring data. All endpoints are authenticated via OAuth 2.0
-      and route through an Application Gateway for rate limiting, quota
-      management, logging, and analytics.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://nexus.hexagon.com/developerportal
-    baseURL: https://nexus.hexagon.com
-    tags:
-      - Manufacturing
-      - Metrology
-      - Quality
-      - Production
-    properties:
-      - type: Documentation
-        url: https://nexus.hexagon.com/documentationcenter/en-US/
-      - type: OpenAPI
-        url: https://nexus.hexagon.com/developerportal
-  - aid: hexagon:hxgn-eam-api
-    name: HxGN EAM REST API
-    description: >-
-      Enterprise Asset Management REST API providing programmatic access to
-      asset lifecycle data including equipment management, work orders,
-      preventive maintenance, document attachments, and service requests.
-      Defined in OpenAPI 3 and available through the Hexagon documentation
-      portal.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189
-    baseURL: https://docs.hexagonali.com
-    tags:
-      - Enterprise Asset Management
-      - Maintenance
-      - Equipment
-    properties:
-      - type: Documentation
-        url: https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189
-  - aid: hexagon:hxgn-sdx-api
-    name: HxGN SDx API Services
-    description: >-
-      Smart Digital eXchange API Services enabling integration with Hexagon's
-      engineering data management platform for plant design, document control,
-      and digital twin workflows in process and power industries.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413
-    baseURL: https://docs.hexagonali.com
-    tags:
-      - Digital Twin
-      - Engineering Data
-      - Plant Design
-    properties:
-      - type: Documentation
-        url: https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413
-common:
-  - type: DomainSecurity
-    url: security/hexagon-domain-security.yml
-  - type: Website
-    url: https://hexagon.com
+  - Quality
+  - Production
+  properties:
   - type: Documentation
     url: https://nexus.hexagon.com/documentationcenter/en-US/
-  - type: GitHubOrg
-    url: https://github.com/hexagonab
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/hexagon-ab
-  - type: Blog
-    url: https://blog.manufacturing.hexagon.com/
-  - type: Pricing
-    url: https://hexagon.com/products/product-groups/nexus
-  - type: StatusPage
-    url: https://status.hxdr.app/
-  - type: X
-    url: https://x.com/hexagonab
-  - type: Plans
-    url: plans/hexagon-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/hexagon-rate-limits.yml
-  - type: FinOps
-    url: finops/hexagon-finops.yml
+  - type: OpenAPI
+    url: https://nexus.hexagon.com/developerportal
+- aid: hexagon:hxgn-eam-api
+  name: HxGN EAM REST API
+  description: Enterprise Asset Management REST API providing programmatic access to asset lifecycle data including equipment management, work orders, preventive maintenance, document attachments, and service requests. Defined in OpenAPI 3 and available through the Hexagon documentation portal.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189
+  baseURL: https://docs.hexagonali.com
+  tags:
+  - Enterprise Asset Management
+  - Maintenance
+  - Equipment
+  properties:
+  - type: Documentation
+    url: https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189
+- aid: hexagon:hxgn-sdx-api
+  name: HxGN SDx API Services
+  description: Smart Digital eXchange API Services enabling integration with Hexagon's engineering data management platform for plant design, document control, and digital twin workflows in process and power industries.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413
+  baseURL: https://docs.hexagonali.com
+  tags:
+  - Digital Twin
+  - Engineering Data
+  - Plant Design
+  properties:
+  - type: Documentation
+    url: https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413
+- aid: hexagon-ab:geocloud-graphql
+  name: Hexagon GeoCloud GraphQL API
+  description: The federated GraphQL API behind Hexagon GeoCloud (formerly HxDR / Reality Cloud Studio) for uploading, processing, organising, streaming and sharing reality-capture and geospatial data. 1,125 types, 93 Query fields, 168 Mutation fields and 3 Subscription fields. Covers projects and folders, assets, grouped assets and artifacts, processing pipelines (auto-registration, meshing, format conversion), scenes and annotations, streaming subscriptions and OGC endpoints, accounts, users and project membership, and a data-store shop with cart, quotation and order flows. Introspection is open to anonymous callers; every data-returning field requires an OIDC bearer token and answers UNAUTHENTICATED without one.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://geocloud.hexagon.com/documentation/
+  baseURL: https://hxdr.app/graphql
+  tags:
+  - Geospatial
+  - Reality Capture
+  - GraphQL
+  - Point Cloud
+  - OGC
+  properties:
+  - type: GraphQL
+    url: graphql/hexagon-hxdr.graphql
+  - type: X-GraphQLIntrospection
+    url: graphql/hexagon-hxdr-introspection.json
+  - type: DataModel
+    url: data-model/hexagon-data-model.yml
+  - type: ErrorCatalog
+    url: errors/hexagon-problem-types.yml
+  - type: Conventions
+    url: conventions/hexagon-conventions.yml
+  - type: Documentation
+    url: https://geocloud.hexagon.com/documentation/
+- aid: hexagon-ab:geocloud-mcp
+  name: Hexagon GeoCloud MCP Server
+  description: A remote Model Context Protocol endpoint served from the Hexagon GeoCloud web property and discoverable through RFC 9728 protected-resource metadata and RFC 8414 authorization-server metadata on the same host. Two server routes are registered under the /wp-json/mcp namespace; both answer an anonymous tools/list with HTTP 401, so the tool set and its input schemas require authenticated introspection.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://geocloud.hexagon.com/
+  baseURL: https://geocloud.hexagon.com/wp-json/mcp/mcp-oauth-server
+  tags:
+  - MCP
+  - Agents
+  - Geospatial
+  properties:
+  - type: MCPServer
+    url: mcp/hexagon-mcp.yml
+common:
+- type: APIReference
+  url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest.md
+- type: DeveloperPortal
+  url: https://nexus.hexagon.com/developerportal
+- type: GettingStarted
+  url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/getting-started.md
+- type: Support
+  url: https://geocloud.hexagon.com/contact-support/
+- type: SignUp
+  url: https://geocloud.hexagon.com/free-demo/
+- type: Login
+  url: https://geocloud.hxdr.app/
+- type: TermsOfService
+  url: https://geocloud.hexagon.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://hexagon.com/legal/privacy-notice
+- type: ChangeLog
+  url: changelog/hexagon-changelog.yml
+- type: Deprecation
+  url: lifecycle/hexagon-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/hexagon-lifecycle.yml
+- type: Authentication
+  url: authentication/hexagon-authentication.yml
+- type: OAuthScopes
+  url: scopes/hexagon-scopes.yml
+- type: WellKnown
+  url: well-known/hexagon-well-known.yml
+- type: Conformance
+  url: conformance/hexagon-conformance.yml
+- type: Compliance
+  url: https://geocloud.hexagon.com/security-compliance/
+- type: TrustCenter
+  url: security/hexagon-trust-center.yml
+- type: LLMsTxt
+  url: llms/hexagon-llms.txt
+- type: MCPServer
+  url: mcp/hexagon-mcp.yml
+- type: Packages
+  url: packages/hexagon-packages.yml
+- type: FAQ
+  url: https://geocloud.hexagon.com/faq/
+- type: AgentSkill
+  url: skills/_index.yml
+- type: GitHubOrganization
+  url: https://github.com/hexagon-oss
+- type: DomainSecurity
+  url: security/hexagon-domain-security.yml
+- type: Website
+  url: https://hexagon.com
+- type: Documentation
+  url: https://nexus.hexagon.com/documentationcenter/en-US/
+- type: GitHubOrg
+  url: https://github.com/hexagonab
+- type: LinkedIn
+  url: https://www.linkedin.com/company/hexagon-ab
+- type: Blog
+  url: https://blog.manufacturing.hexagon.com/
+- type: Pricing
+  url: https://hexagon.com/products/product-groups/nexus
+- type: StatusPage
+  url: https://status.hxdr.app/
+- type: X
+  url: https://x.com/hexagonab
+- type: Plans
+  url: plans/hexagon-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/hexagon-rate-limits.yml
+- type: FinOps
+  url: finops/hexagon-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,73 @@
+generated: '2026-09-13'
+method: probed
+source: >-
+  https://geocloud.hexagon.com/.well-known/oauth-protected-resource (HTTP 200)
+  named the resource; https://geocloud.hexagon.com/wp-json/mcp (HTTP 200)
+  enumerated the two server routes; both were then POSTed directly.
+name: Hexagon GeoCloud MCP
+status: published
+deployment:
+  mode: remote
+  endpoint: https://geocloud.hexagon.com/wp-json/mcp/mcp-oauth-server
+  auth: oauth
+  verified: probed
+servers:
+  - id: mcp-oauth-server
+    endpoint: https://geocloud.hexagon.com/wp-json/mcp/mcp-oauth-server
+    transport: streamable-http
+    methods:
+      - POST
+      - GET
+      - DELETE
+    auth: oauth
+    probe:
+      method: POST
+      body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+      http_status: 401
+      body_returned: '{"code":"mcp_unauthorized","message":"MCP authentication required.","data":{"status":401}}'
+      checked: '2026-09-13'
+  - id: mcp-adapter-default-server
+    endpoint: https://geocloud.hexagon.com/wp-json/mcp/mcp-adapter-default-server
+    transport: streamable-http
+    methods:
+      - POST
+      - GET
+      - DELETE
+    auth: cookie-or-application-password
+    probe:
+      method: POST
+      body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+      http_status: 401
+      body_returned: '{"code":"rest_forbidden","message":"Sorry, you are not allowed to do that.","data":{"status":401}}'
+      checked: '2026-09-13'
+discovery:
+  protected_resource_metadata: https://geocloud.hexagon.com/.well-known/oauth-protected-resource
+  authorization_server_metadata: https://geocloud.hexagon.com/.well-known/oauth-authorization-server
+  authorization_endpoint: https://geocloud.hexagon.com/oauth/authorize
+  token_endpoint: https://geocloud.hexagon.com/oauth/token
+  revocation_endpoint: https://geocloud.hexagon.com/oauth/revoke
+  scopes_supported:
+    - mcp
+  code_challenge_methods_supported:
+    - S256
+  dynamic_client_registration: >-
+    No /register endpoint is advertised. The authorization server instead sets
+    client_id_metadata_document_supported: true, so clients identify themselves
+    with a client-ID metadata document URL rather than by pre-registering.
+tools: []
+tools_note: >-
+  The live tool list could not be read. Both endpoints answered the anonymous
+  tools/list call with HTTP 401, so the tool names and their inputSchemas require
+  an authenticated MCP introspection. Nothing is listed here rather than guessed.
+  No published tool list exists in any llms.txt or documentation page found in
+  this pass.
+scope_note: >-
+  This server is served from the Hexagon GeoCloud WordPress site
+  (geocloud.hexagon.com, WP Engine + Cloudflare) and its route namespace
+  (/wp-json/mcp/...) and companion /wp-json/wp-abilities/v1 namespace identify it
+  as the WordPress MCP Adapter. It is a real remote MCP endpoint on a host
+  Hexagon AB controls, and it is discoverable exactly the way the MCP
+  authorization spec intends - but the surface behind it is the GeoCloud web
+  property, not the GeoCloud product API. The product API is the GraphQL
+  endpoint recorded separately at https://hxdr.app/graphql, which has no MCP
+  projection.

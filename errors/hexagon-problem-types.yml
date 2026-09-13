@@ -1,0 +1,126 @@
+generated: '2026-09-13'
+method: derived
+source: >-
+  graphql/hexagon-ab-hxdr.graphql, introspected live from https://hxdr.app/graphql
+  on 2026-09-13; plus two observed anonymous error responses from that endpoint and
+  one from https://geocloud.hexagon.com/wp-json/mcp/mcp-oauth-server.
+format: graphql-errors
+format_note: >-
+  Not RFC 9457. Failures arrive as GraphQL errors[] over HTTP 200, with a machine
+  code in errors[].extensions.code. Separately - and this is the more useful half -
+  the schema models expected business failures as TYPED result members inside
+  unions, so a client discriminates on __typename rather than parsing a string.
+envelopes:
+  - id: transport-errors
+    shape: '{ "errors": [ { "message": string, "path": [string], "locations": [...], "extensions": { "code": string, "gateway": string } } ], "data": null }'
+    http_status: 200
+    observed_codes:
+      - code: UNAUTHENTICATED
+        message: You can not access the requested resource.
+        observed_on: 'POST https://hxdr.app/graphql {"query":"{getUser{id}}"} with no Authorization header'
+        remediation: 'Obtain an OIDC bearer token from the hxauth.com geo-hxdr-prod realm and send it as Authorization: Bearer.'
+      - code: GRAPHQL_VALIDATION_FAILED
+        message: 'Cannot query field "<field>" on type "<Type>".'
+        observed_on: 'POST https://hxdr.app/graphql with a field that does not exist'
+        remediation: Validate the document against graphql/hexagon-ab-hxdr.graphql before sending.
+  - id: mcp-errors
+    applies_to: hexagon-ab:geocloud-mcp
+    shape: '{ "code": string, "message": string, "data": { "status": integer } }'
+    observed_codes:
+      - code: mcp_unauthorized
+        message: MCP authentication required.
+        http_status: 401
+        endpoint: https://geocloud.hexagon.com/wp-json/mcp/mcp-oauth-server
+      - code: rest_forbidden
+        message: Sorry, you are not allowed to do that.
+        http_status: 401
+        endpoint: https://geocloud.hexagon.com/wp-json/mcp/mcp-adapter-default-server
+typed_errors:
+  note: >-
+    21 typed error objects are declared in the GraphQL schema and returned as
+    union members alongside success payloads. Titles below are the schema's own
+    descriptions, verbatim.
+  count: 21
+  types:
+    - id: ErrorResourceNotFoundOutput
+      title: The requested resource could not be found.
+      class: not-found
+    - id: ErrorResourceAccessDeniedOutput
+      title: The user does not have access to the requested resource.
+      class: authorization
+    - id: ErrorOperationNotAllowedOutput
+      title: The user is not allowed to perform the query or mutation.
+      class: authorization
+    - id: ErrorCrossAccountOperationNotAllowedOutput
+      title: The user is not allowed to perform the requested operation from or to a different account.
+      class: authorization
+    - id: ErrorOperationNotPossibleOutput
+      title: The operation cannot be performed due to a generic issue (e.g. a field being null in the DB).
+      class: conflict
+    - id: ErrorInputValidationFailedOutput
+      title: The input is invalid.
+      class: validation
+    - id: ErrorInvalidDateOutput
+      title: The provided value is outside the allowed range or set of permitted values.
+      class: validation
+    - id: ErrorSchemaInvalidOutput
+      title: The uploaded schema is not a valid JSON schema.
+      class: validation
+    - id: ErrorNegativeOrderOutput
+      title: Negative order numbers are not allowed to be assigned to levels.
+      class: validation
+    - id: ErrorDuplicateNameOutput
+      title: The requested name is already in use, it cannot be duplicated.
+      class: conflict
+    - id: ErrorConcurrentModificationOutput
+      title: The version number is not equal to the current version.
+      class: concurrency
+      note: Optimistic concurrency control - the caller sent a stale version number.
+    - id: ErrorVersionUpgradeFailedOutput
+      title: >-
+        The upgrade failed because the expected current version does not match the
+        actual current version. This typically means another client has performed
+        an upgrade.
+      class: concurrency
+    - id: ErrorLockViolationOutput
+      title: The action is forbidden by a Lock.
+      class: concurrency
+    - id: ErrorLimitReachedOutput
+      title: The operation is not possible because the upload/download/processing limit has been reached.
+      class: quota
+      note: >-
+        This is the quota signal for the three metered categories described at
+        rate-limits/hexagon-ab-rate-limits.yml.
+    - id: ErrorMaxStepsExceededOutput
+      title: ''
+      class: quota
+      note: No description is published in the schema.
+    - id: ErrorPipelineAlreadyTriggeredOutput
+      title: The processing can not be started because there is already a pipeline running for that input.
+      class: conflict
+      note: >-
+        This is the closest thing the API has to replay protection - a duplicate
+        pipeline trigger is rejected rather than double-charged.
+    - id: ErrorPipelineInformationNotYetAvailableOutput
+      title: >-
+        Returned when pipeline information for a processing artifact is temporarily
+        unavailable, typically due to a short propagation delay after pipeline
+        creation.
+      class: transient
+      note: Retryable.
+    - id: ErrorLimitBoxDeletedOutput
+      title: The point cloud was generated from a limit box, but that limit box has since been deleted.
+      class: not-found
+    - id: ErrorNoRelatedLimitBoxOutput
+      title: The point cloud was not generated from a limit box, so no limiting box annotation is associated with it.
+      class: not-found
+    - id: ErrorStorageRegionIsNotValidOutput
+      title: The specified storage region is not one of the regions configured on this platform.
+      class: validation
+    - id: ErrorUserNotEligibleForPromotionOutput
+      title: When the user is not Hexagon SSO.
+      class: authorization
+docs: null
+docs_note: >-
+  No public error reference page exists. Every entry above was read out of the
+  contract or observed live; none was authored here.

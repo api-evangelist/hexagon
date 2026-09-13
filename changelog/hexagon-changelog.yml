@@ -1,0 +1,85 @@
+generated: '2026-09-13'
+method: searched
+source: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/release-notes.md
+docs: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/release-notes.md
+applies_to: hexagon-ab:geocloud-graphql
+product: Hexagon GeoCloud (formerly Reality Cloud Studio / HxDR)
+scheme: date-based
+cadence: weekly to fortnightly
+current_version: '2026.09.07'
+current_version_note: >-
+  The docs platform stamps a version in the frontmatter of every published page
+  (version "2026.09.07"). The API itself carries no version identifier.
+machine_readable: true
+machine_readable_note: >-
+  Every release-note page is served as clean Markdown at a .md URL and every one of
+  them is listed in the provider's own /llms.txt, so the whole changelog is
+  crawlable without JavaScript. Archives exist for 2024, 2025 and 2026.
+archives:
+  - year: 2026
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/2026-hexagon-geocloud-release-notes.md
+    entries: 26
+  - year: 2025
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/2025-reality-cloud-studio-release-notes.md
+  - year: 2024
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/2024-reality-cloud-studio-release-notes.md
+breaking_change_policy:
+  documented: false
+  note: >-
+    The release notes are organised as "New features", "Improvements" and "Bug
+    fixes". There is no "Breaking changes" section and no cross-reference to the
+    104 @deprecated schema elements, so the only notice of an API-breaking change
+    is the deprecation reason inside the GraphQL schema itself. See
+    lifecycle/hexagon-ab-lifecycle.yml.
+entries:
+  - date: '2026-09-07'
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/september-7-2026-hexagon-geocloud.md
+    breaking: false
+    additions: []
+    fixes:
+      - List-category GeoTags can be added again - previously failed with a 500 error.
+      - Assets stay visible when the scene drawer is open.
+  - date: '2026-08-31'
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/august-31-2026-hexagon-geocloud.md
+    breaking: false
+    additions:
+      - >-
+        Switch between the User Coordinate Systems an asset carries without
+        re-uploading; the selection propagates to measurements, GeoTags, grid, view
+        cube, SiteMap, Panorama orientation, limit boxes and tours.
+  - date: '2026-08-25'
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/august-25-2026-hexagon-geocloud.md
+    breaking: false
+    additions: []
+    improvements:
+      - 'More characters allowed in project, folder and asset names.'
+      - Viewcube in all scenes.
+      - Clearer device names when meshing (RTC Series, BLK360 Series).
+      - >-
+        Quota wording clarified - "Processing and downloading count towards your
+        subscription quota".
+    fixes:
+      - Project page opens correctly instead of "Something went wrong".
+      - Magnifier measurements land where the magnifier is aimed.
+      - Meshes visible for assets processed with Image enhance.
+  - date: '2026-08-17'
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/august-17-2026-hexagon-geocloud.md
+    breaking: false
+  - date: '2026-08-10'
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/august-10-2026-hexagon-geocloud.md
+    breaking: false
+  - date: '2026-08-03'
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/august-3-2026-hexagon-geocloud.md
+    breaking: false
+  - date: '2026-07-20'
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/july-20-2026-hexagon-geocloud.md
+    breaking: false
+  - date: '2026-04-20'
+    url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/april-20-2026-hexagon-geocloud.md
+    breaking: false
+    note: >-
+      First entry published under the Hexagon GeoCloud name; every entry up to
+      2026-04-13 is titled Reality Cloud Studio.
+note: >-
+  Product-level release notes, not an API changelog. Nothing in the 2026 series
+  mentions the GraphQL schema, a field addition or a deprecation.

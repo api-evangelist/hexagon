@@ -1,0 +1,195 @@
+generated: '2026-09-13'
+method: probed
+source: >-
+  Read from documents fetched in this pass:
+  https://hxauth.com/auth/realms/geo-hxdr-prod/.well-known/openid-configuration,
+  https://geocloud.hexagon.com/.well-known/oauth-authorization-server,
+  https://geocloud.hexagon.com/.well-known/oauth-protected-resource,
+  https://geocloud.hexagon.com/security-compliance/, and the GraphQL SDL at
+  graphql/hexagon-ab-hxdr.graphql introspected from https://hxdr.app/graphql.
+conformance:
+  - id: openid-connect-discovery-1.0
+    name: OpenID Connect Discovery 1.0
+    conforms: true
+    evidence: https://hxauth.com/auth/realms/geo-hxdr-prod/.well-known/openid-configuration
+    note: HTTP 200, complete provider metadata document.
+  - id: rfc8414
+    name: RFC 8414 OAuth 2.0 Authorization Server Metadata
+    conforms: true
+    evidence: https://geocloud.hexagon.com/.well-known/oauth-authorization-server
+    note: HTTP 200, JSON with issuer, authorization_endpoint, token_endpoint, revocation_endpoint.
+  - id: rfc9728
+    name: RFC 9728 OAuth 2.0 Protected Resource Metadata
+    conforms: true
+    evidence: https://geocloud.hexagon.com/.well-known/oauth-protected-resource
+    note: >-
+      HTTP 200, names the MCP resource and its authorization server. This is the
+      discovery document the MCP authorization spec requires.
+  - id: rfc7636
+    name: RFC 7636 PKCE
+    conforms: true
+    evidence: >-
+      code_challenge_methods_supported ["S256"] in the GeoCloud AS metadata and
+      ["plain","S256"] in the hxauth realm metadata.
+  - id: rfc8628
+    name: RFC 8628 OAuth 2.0 Device Authorization Grant
+    conforms: true
+    evidence: >-
+      device_authorization_endpoint and
+      urn:ietf:params:oauth:grant-type:device_code in the hxauth realm metadata.
+  - id: rfc8693
+    name: RFC 8693 OAuth 2.0 Token Exchange
+    conforms: true
+    evidence: urn:ietf:params:oauth:grant-type:token-exchange in grant_types_supported.
+  - id: rfc7523
+    name: RFC 7523 JWT Profile for OAuth 2.0 Client Authentication and Authorization Grants
+    conforms: true
+    evidence: >-
+      urn:ietf:params:oauth:grant-type:jwt-bearer in grant_types_supported and
+      private_key_jwt in token_endpoint_auth_methods_supported.
+  - id: rfc8705
+    name: RFC 8705 Mutual-TLS Client Authentication
+    conforms: true
+    evidence: tls_client_auth in token_endpoint_auth_methods_supported.
+  - id: rfc7009
+    name: RFC 7009 OAuth 2.0 Token Revocation
+    conforms: true
+    evidence: revocation_endpoint advertised by both authorization servers.
+  - id: rfc7662
+    name: RFC 7662 OAuth 2.0 Token Introspection
+    conforms: true
+    evidence: introspection_endpoint in the hxauth realm metadata.
+  - id: rfc7591
+    name: RFC 7591 OAuth 2.0 Dynamic Client Registration
+    conforms: true
+    evidence: >-
+      registration_endpoint
+      https://hxauth.com/auth/realms/geo-hxdr-prod/clients-registrations/openid-connect.
+    note: >-
+      Advertised by the hxauth realm only. The GeoCloud MCP authorization server
+      does NOT advertise one and uses a client-ID metadata document instead.
+  - id: oidc-ciba
+    name: OpenID Connect Client-Initiated Backchannel Authentication
+    conforms: true
+    evidence: urn:openid:params:grant-type:ciba in grant_types_supported.
+  - id: oidc-backchannel-logout
+    name: OpenID Connect Back-Channel and Front-Channel Logout
+    conforms: true
+    evidence: backchannel_logout_supported true and frontchannel_logout_supported true.
+  - id: graphql-introspection
+    name: GraphQL introspection (June 2018 specification)
+    conforms: true
+    evidence: >-
+      POST https://hxdr.app/graphql with the full IntrospectionQuery returns HTTP
+      200 and a complete __schema document - 1,125 types. Saved to
+      graphql/hexagon-ab-hxdr-introspection.json.
+  - id: apollo-federation
+    name: GraphQL federation / schema stitching
+    conforms: true
+    evidence: >-
+      The SDL declares the federation-family directives @key(selectionSet:),
+      @merge, @computed and @canonical and exposes an _entities root field, so the
+      published schema is a stitched gateway over multiple subgraphs. The error
+      envelope carries extensions.gateway (observed value 1.36.0).
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Errors are GraphQL errors[] with extensions.code (UNAUTHENTICATED,
+      GRAPHQL_VALIDATION_FAILED) over HTTP 200, not application/problem+json. The
+      MCP endpoint returns a WordPress REST error envelope
+      {code,message,data.status}, also not problem+json.
+    note: Recorded as an honest negative, not a penalty - GraphQL has its own error contract.
+  - id: rfc6750-www-authenticate
+    name: RFC 6750 / RFC 9728 WWW-Authenticate challenge on the protected resource
+    conforms: false
+    evidence: >-
+      The MCP endpoint answers an anonymous POST with HTTP 401 and a JSON body but
+      no WWW-Authenticate header pointing at the resource metadata, so a client
+      must already know the /.well-known/oauth-protected-resource location.
+domain_standards:
+  - id: ogc-3d-tiles
+    name: OGC 3D Tiles (OGC 22-025r4)
+    market: geospatial / reality capture
+    conforms: true
+    declared_in_contract: true
+    evidence: >-
+      graphql/hexagon-ab-hxdr.graphql - enum ServiceTypeEnum value OGC_3D_TILES,
+      enum EndpointTypeEnum value OGC_3D_TILES, enum OutputFormat value
+      OGC3D_TILES, enum SavedFormatEnum values OGC3D_TILES and OGC3D_TILES_ZIPPED,
+      enum StreamableFormatEnum value OGC_3D_TILES, type LayerAddressOgc3DTiles,
+      type BaselayerOgc3DOutput, type AddressOgc3DOutput, mutation
+      createOgc3dBaselayer, and fourteen LUCIAD_*_TO_OGC3DTILES processing-pipeline
+      enum values.
+    note: >-
+      This is a contract-level declaration, not a marketing claim - the standard is
+      a first-class value in the schema's own type system.
+  - id: ogc-wms
+    name: OGC Web Map Service (WMS)
+    market: geospatial
+    conforms: true
+    declared_in_contract: true
+    evidence: >-
+      graphql/hexagon-ab-hxdr.graphql - enum ServiceTypeEnum value WMS, enum
+      AddressTypeEnum value WMS, enum OutputFormat value WMS, type
+      AddressWmsOutput, type LayerAddressWms, type BaselayerWmsOutput, mutation
+      createWmsBaselayer, and processing pipeline LUCIAD_VECTOR_OR_RASTER_TO_WMS.
+  - id: ogc-wmts
+    name: OGC Web Map Tile Service (WMTS)
+    market: geospatial
+    conforms: true
+    declared_in_contract: true
+    evidence: >-
+      graphql/hexagon-ab-hxdr.graphql - enum ServiceTypeEnum value WMTS, type
+      AddressWmtsOutput, type LayerAddressWmts, type BaselayerWmtsOutput, mutation
+      createWmtsBaselayer, and processing pipeline LUCIAD_VECTOR_OR_RASTER_TO_WMTS.
+  - id: ogc-wfs
+    name: OGC Web Feature Service (WFS)
+    market: geospatial
+    conforms: true
+    declared_in_contract: true
+    evidence: >-
+      graphql/hexagon-ab-hxdr.graphql - enum ServiceTypeEnum value WFS, enum
+      EndpointTypeEnum value WFS, enum StreamableFormatEnum value WFS, type
+      AddressWfsOutput, type BaselayerWfsOutput, mutation createWfsBaselayer, and
+      processing pipeline LUCIAD_VECTOR_TO_WFS.
+ogc_probe:
+  attempted: true
+  result: none
+  note: >-
+    NO OGC contract is saved or derived for this provider. The WMS/WMTS/WFS and
+    3D Tiles endpoints this API produces are per-account streaming subscriptions
+    minted at runtime under an authenticated session - the schema's own
+    AddressInterface.endpoint description says the value is "the path of the
+    object, needs to be appended to the domain of the backend". There is no
+    anonymous landing page, no /conformance document and no
+    ?service=WMS&request=GetCapabilities endpoint reachable without credentials,
+    so no GetCapabilities or conformance artifact exists to save. Recording the
+    declaration without the document is the honest result.
+compliance:
+  source: https://geocloud.hexagon.com/security-compliance/
+  certifications:
+    - id: soc2-type-ii
+      name: SOC 2 Type II
+      status: claimed
+      evidence: https://geocloud.hexagon.com/security-compliance/
+    - id: iso-iec-27001-2022
+      name: ISO/IEC 27001:2022
+      status: claimed
+      evidence: https://geocloud.hexagon.com/security-compliance/
+    - id: csa-star-level-1
+      name: CSA STAR Level 1
+      status: claimed
+      evidence: https://geocloud.hexagon.com/security-compliance/
+    - id: gdpr
+      name: GDPR
+      status: claimed
+      evidence: https://geocloud.hexagon.com/security-compliance/
+    - id: ccpa
+      name: CCPA
+      status: claimed
+      evidence: https://geocloud.hexagon.com/security-compliance/
+  note: >-
+    Named on Hexagon's own public security and compliance page for GeoCloud. No
+    downloadable report, audit letter or third-party trust-portal link is offered,
+    so these are published claims rather than verified attestations.

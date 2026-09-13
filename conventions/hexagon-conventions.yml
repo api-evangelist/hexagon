@@ -1,0 +1,183 @@
+generated: '2026-09-13'
+method: derived
+source: >-
+  graphql/hexagon-ab-hxdr.graphql (introspected from https://hxdr.app/graphql),
+  observed response headers from that endpoint, and the published Hexagon GeoCloud
+  documentation at
+  https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/usage-based-account-information.md
+applies_to: hexagon-ab:geocloud-graphql
+transport:
+  protocol: GraphQL over HTTP POST
+  endpoint: https://hxdr.app/graphql
+  alternate_endpoint: https://geocloud.hxdr.app/graphql
+  content_type: application/json
+  introspection: open to anonymous callers
+  cors: 'access-control-allow-origin: * observed on the GraphQL endpoint'
+  gateway: >-
+    A stitching gateway - the SDL carries @key(selectionSet:), @merge, @computed
+    and @canonical directives and an _entities root field, and errors carry
+    extensions.gateway (observed 1.36.0).
+auth_style:
+  model: oauth2-bearer-jwt
+  header: 'Authorization: Bearer <OIDC access token>'
+  detail: See authentication/hexagon-ab-authentication.yml
+pagination:
+  style: page-number
+  input_type: PaginationInput
+  params:
+    - pageNumber
+    - pageSize
+  response_fields:
+    - _pageNumber
+    - _pageSize
+  cursor_type_present: true
+  cursor_note: >-
+    A Relay-shaped PageInfo type (startCursor, endCursor, hasNextPage,
+    hasPreviousPage) is declared in the schema alongside the page-number scheme, so
+    both idioms coexist. Only one Query field (search) takes a pagination argument
+    directly; most collections paginate on a nested *ResultOutput wrapper.
+filtering_and_search:
+  note: >-
+    A dedicated `search` Query field plus per-domain *ResultOutput wrappers.
+    Labels/annotations have their own searchLabelsV2 surface.
+versioning:
+  style: in-schema-suffix
+  detail: >-
+    There is no URL version, no header version and no date-pinned version. New
+    behaviour ships as a NEW FIELD with a V-suffix (signupV5, artifactsV3,
+    accountMembersV2, deleteAssetV2, projectsV2) and the old field is marked
+    @deprecated with a dated termination. The schema is the version.
+  implication_for_agents: >-
+    A client must re-introspect to discover the current generation of a field; the
+    highest V-suffix on a name is the live one.
+error_envelope:
+  style: graphql-errors-plus-typed-unions
+  detail: See errors/hexagon-ab-problem-types.yml
+request_id_tracing:
+  supported: true
+  header: x-request-id
+  detail: >-
+    Observed on responses from https://hxdr.app/graphql (example value 80zGb2vu).
+    No documentation explains it, but it is present on every response and is the
+    only correlation handle the API offers.
+security_headers_observed:
+  - 'strict-transport-security: max-age=31536000;includeSubDomains'
+  - 'x-content-type-options: nosniff'
+  - 'x-frame-options: SAMEORIGIN'
+  - 'referrer-policy: same-origin'
+  - 'cache-control: no-cache, no-store, max-age=0, must-revalidate'
+cdn: Amazon CloudFront (via header observed on hxdr.app).
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  scope: []
+  detail: >-
+    No Idempotency-Key header, no client-supplied request-id argument and no
+    idempotency-token input field exists anywhere in the 168-mutation surface. A
+    retried mutation re-executes. Two partial mitigations exist and neither is
+    replay protection: ErrorPipelineAlreadyTriggeredOutput rejects a second
+    processing pipeline for an input that already has one running, and
+    ErrorConcurrentModificationOutput / ErrorVersionUpgradeFailedOutput implement
+    optimistic concurrency on versioned resources by comparing a caller-supplied
+    version number. Both stop a CONFLICTING write; neither makes a repeated
+    identical write safe.
+  evidence: graphql/hexagon-ab-hxdr.graphql
+dry_run_mode:
+  supported: partial
+  detail: >-
+    No general dry-run. Two genuine cost-preview operations exist for the
+    expensive path: processingTokensQuotation ("Gets the number of tokens that is
+    going to be consumed if we trigger a pipeline") and quotation for the data-store
+    shop. An agent can price a processing run before committing to it, but cannot
+    rehearse an arbitrary mutation.
+  operations:
+    - processingTokensQuotation
+    - quotation
+    - getSubscriptionQuotationV2
+reversibility:
+  grade: documented
+  detail: >-
+    31 of the 168 mutations are reversal or teardown operations, so most writes
+    have a stated undo path in the contract. What is missing almost everywhere is
+    the WINDOW - the schema states that a thing can be deleted or cancelled, not
+    for how long it can be taken back. Exactly one reversal window is stated in
+    the provider's own documentation, for subscription cancellation. Nothing below
+    asserts a window the docs do not state.
+  surfaces:
+    - write: createArtifactV2 / OGC 3D Tiles and format-conversion processing pipelines
+      reversal: deleteArtifact
+      window: null
+      window_note: >-
+        Not stated. Processing already consumed against the metered processing
+        allowance is not refunded by deleting the artifact; the docs say
+        re-uploading and reprocessing the same files consumes the allowance again.
+      source: graphql/hexagon-ab-hxdr.graphql
+    - write: createProjectV2
+      reversal: deleteProjectV2
+      window: null
+      source: graphql/hexagon-ab-hxdr.graphql
+    - write: createFolder / uploadAsset
+      reversal: deleteFolderV2, deleteAssetV2, deleteAssetVersion
+      window: null
+      source: graphql/hexagon-ab-hxdr.graphql
+    - write: createScene / scene nodes and effects
+      reversal: deleteScene, deleteSceneNode, removeSceneNodeEffects
+      window: null
+      source: graphql/hexagon-ab-hxdr.graphql
+    - write: addUserToProject / invite
+      reversal: removeUserFromProjectV2, deleteUserV2
+      window: null
+      source: graphql/hexagon-ab-hxdr.graphql
+    - write: createStreamingSubscriptionAdmin
+      reversal: deleteStreamingSubscriptionAdmin
+      window: null
+      source: graphql/hexagon-ab-hxdr.graphql
+    - write: subscription purchase / renewal
+      reversal: cancelCurrentSubscriptionV2, and stopPendingSubscriptionCancellation to un-cancel
+      window: >-
+        Until the end of the contracted term. The provider states - "you are billed
+        annually by invoice. You will be contacted by our sales team before your
+        subscription renews and you may cancel at that time... If you cancel before
+        the end of your contract, you will retain access to the product through the
+        end of the original contract date, after which your access will be removed.
+        No refunds are made for unused time."
+      source: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/usage-based-account-information.md
+    - write: token purchase
+      reversal: refundTokens
+      window: null
+      window_note: Admin-facing. No refund window is stated anywhere public.
+      source: graphql/hexagon-ab-hxdr.graphql
+  note: >-
+    stopPendingSubscriptionCancellation is worth calling out - it is a reversal OF
+    a reversal, which is rarer than it sounds and is exactly the affordance an
+    agent needs after an over-eager cancel.
+concurrency:
+  optimistic_locking: true
+  detail: >-
+    Versioned resources compare a caller-supplied version number and reject a
+    stale write with ErrorConcurrentModificationOutput or
+    ErrorVersionUpgradeFailedOutput. Explicit locks also exist
+    (ErrorLockViolationOutput, SceneLockOutput).
+rate_limit_signaling:
+  headers_observed: []
+  detail: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header was returned on any
+    anonymous response. Quota exhaustion is signalled in-band as the typed
+    ErrorLimitReachedOutput. See rate-limits/hexagon-ab-rate-limits.yml.
+events:
+  subscriptions:
+    - projectChanged
+    - countdown
+    - _noop
+  detail: >-
+    Three GraphQL Subscription fields, of which one is a no-op placeholder and one
+    is a countdown timer. projectChanged is the only real change feed. No webhooks
+    and no AsyncAPI exist - see the asyncapi note in the review.
+cross_links:
+  errors: errors/hexagon-ab-problem-types.yml
+  lifecycle: lifecycle/hexagon-ab-lifecycle.yml
+  authentication: authentication/hexagon-ab-authentication.yml
+  scopes: scopes/hexagon-ab-scopes.yml
+  rate_limits: rate-limits/hexagon-ab-rate-limits.yml
+  data_model: data-model/hexagon-ab-data-model.yml

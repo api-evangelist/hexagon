@@ -1,0 +1,166 @@
+generated: '2026-09-13'
+method: probed
+source: 'Direct HTTP probes of every host this record knows: the registrable domain and www, the GeoCloud
+  marketing/API host, the HxDR application + GraphQL host, the Nexus developer portal, the Leica Geosystems
+  documentation host and the Statuspage host.'
+note: 'Two real documents were returned, both on geocloud.hexagon.com: an RFC 8414 OAuth 2.0 Authorization
+  Server Metadata document and an RFC 9728 OAuth 2.0 Protected Resource Metadata document. Together they
+  advertise a remote MCP server at https://geocloud.hexagon.com/wp-json/mcp/mcp-oauth-server. Every other
+  path 404d. IMPORTANT FALSE-POSITIVE NOTE - hxdr.app and docs.hexagonali.com are single-page-application
+  catch-alls that answer HTTP 200 with an HTML shell for every /.well-known/* path; those 200s are recorded
+  below as shell (not documents) and are treated as misses.'
+hosts:
+- host: hexagon.com
+  note: The corporate site is behind an edge policy that answers 403 to non-browser clients on every path,
+    /robots.txt included. Not a document result either way.
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+  - path: /llms.txt
+    status: 403
+- host: geocloud.hexagon.com
+  note: Hexagon GeoCloud (the product formerly marketed as HxDR / Reality Cloud Studio). WordPress on
+    WP Engine behind Cloudflare. The two OAuth discovery documents are real JSON and are saved verbatim.
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: hexagon-ab-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: hexagon-ab-oauth-protected-resource.json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: hxdr.app
+  note: SPA catch-all. Every path below returned HTTP 200 with the same 4,450-byte HTML application shell,
+    so none of them is a document. Recorded as a miss.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: html-shell
+  - path: /.well-known/openid-configuration
+    status: 200
+    result: html-shell
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    result: html-shell
+  - path: /.well-known/api-catalog
+    status: 200
+    result: html-shell
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent.json
+    status: 200
+    result: html-shell
+  - path: /llms.txt
+    status: 200
+    result: html-shell
+- host: nexus.hexagon.com
+  note: Hexagon Nexus developer portal and documentation centre.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: rcdocs.leica-geosystems.com
+  note: Leica Geosystems reality-capture documentation host. No /.well-known documents, but it does serve
+    a real, provider-authored /llms.txt (2,347 linked documents) which is saved verbatim to llms/hexagon-ab-llms.txt.
+  documents:
+  - path: /llms.txt
+    status: 200
+    file: ../llms/hexagon-ab-llms.txt
+  - path: /.well-known/security.txt
+    status: 404
+- host: docs.hxdr.app
+  note: Former HxDR documentation host. The root 302s to /login and every /.well-known path and /llms.txt
+    return 404. The published docs.hxdr.app/featuredoc tree now 404s as well; documentation has moved
+    to rcdocs.leica-geosystems.com.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: docs.hexagonali.com
+  note: SPA catch-all - answers HTTP 200 with a 2,668-byte HTML shell for every /.well-known path. Treated
+    as a miss.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: html-shell
+  - path: /.well-known/api-catalog
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent.json
+    status: 200
+    result: html-shell
+- host: hxauth.com
+  note: Hexagon identity host (Keycloak). Named by the HxDR application's own runtime OIDC_AUTHORITY value,
+    not guessed - this is the third-host case roadmap#244 describes. The realm-scoped OpenID Connect discovery
+    document is real and is saved verbatim; the bare-domain /.well-known paths all 404 because the metadata
+    lives under the realm path.
+  documents:
+  - path: /auth/realms/geo-hxdr-prod/.well-known/openid-configuration
+    status: 200
+    file: hexagon-ab-hxauth-openid-configuration.json
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /llms.txt
+    status: 404

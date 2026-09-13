@@ -1,0 +1,53 @@
+generated: '2026-09-13'
+method: searched
+source: https://geocloud.hexagon.com/security-compliance/
+url: https://geocloud.hexagon.com/security-compliance/
+http_status: 200
+name: Hexagon GeoCloud Security and Compliance
+type: security-page
+detail: >-
+  A first-party public security and compliance page for Hexagon GeoCloud. It is a
+  marketing-style page rather than a trust portal - there is no document request
+  flow, no downloadable report, no subprocessor list and no third-party trust
+  platform behind it - but it names specific certifications rather than gesturing
+  at "enterprise-grade security", which is the distinction that matters to a buyer.
+certifications:
+  - id: soc2-type-ii
+    name: SOC 2 Type II
+    quote: >-
+      SOC 2 Type II certification which demonstrates the product's commitment to
+      maintaining high standards of data security and privacy
+    report_available: false
+  - id: iso-iec-27001-2022
+    name: ISO/IEC 27001:2022
+    quote: >-
+      ISO/IEC 27001 is the world's best-known standard for information security
+      management systems (ISMS)
+    report_available: false
+  - id: csa-star-level-1
+    name: CSA STAR Level 1
+    report_available: false
+    note: Displayed as a certification badge on the page.
+regulatory:
+  - id: gdpr
+    name: GDPR
+    quote: The Hexagon Data Protection Program is based on and compliant with GDPR
+  - id: ccpa
+    name: CCPA
+    quote: it is also compliant to CCPA
+practices_claimed:
+  - Encryption at rest and in transit
+  - Regular security audits
+  - Proactive threat detection
+  - Penetration testing
+  - Vulnerability scanning
+  - Code review process
+  - Multi-factor authentication
+  - Single sign-on
+related:
+  privacy_notice: https://hexagon.com/legal/privacy-notice
+  user_administration: https://rcdocs.leica-geosystems.com/reality-cloud-studio/latest/reality-cloud-studio-user-administration-and-autho
+gaps:
+  - No downloadable SOC 2 report or ISO certificate, and no NDA/document-request flow.
+  - No subprocessor list.
+  - No data-residency page, although the GraphQL contract models storage regions.
