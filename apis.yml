@@ -37,6 +37,7 @@ tags:
 - Production Monitoring
 - Industrial IoT
 - Smart Manufacturing
+- Geospatial
 apis:
 - aid: hexagon:nexus-api
   name: Hexagon Nexus API
@@ -118,6 +119,9 @@ apis:
   properties:
   - type: MCPServer
     url: mcp/hexagon-mcp.yml
+  x-surface: platform-generated
+  x-platform: wordpress
+  x-platform-surface: mcp-plugin
 common:
 - type: APIReference
   url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest.md
