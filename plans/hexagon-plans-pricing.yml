@@ -69,3 +69,27 @@ notes: >-
   sales team. No self-serve pricing tiers are publicly published. Hexagon
   serves industrial manufacturers, utilities, and process industries globally
   with deployment options ranging from cloud (Azure) to on-premise.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Nexus Platform — Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: HxGN EAM — Enterprise Asset Management
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: HxGN SDx — Smart Digital eXchange
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
