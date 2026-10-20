@@ -1,0 +1,218 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 17
+  own: 6
+  other_domain: 8
+  platform: 3
+  roles:
+  - api
+  - docs
+  - identity
+  - marketing
+  - other
+  - portal
+  - source
+  - status
+  - website
+hosts:
+- host: api.hexagon.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: hexagon.com
+  role: api
+  relation: own
+- host: api.hexagonali.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: hexagonali.com
+  role: api
+  relation: other-domain
+- host: api.hxdr.app
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: hxdr.app
+  role: api
+  relation: other-domain
+- host: api.leica-geosystems.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: leica-geosystems.com
+  role: api
+  relation: other-domain
+- host: blog.manufacturing.hexagon.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Blog
+  serves: []
+  registrable_domain: hexagon.com
+  role: marketing
+  relation: own
+- host: docs.hexagon.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - namespace-probe
+  - docs-index
+  types:
+  - GettingStarted
+  serves:
+  - docs
+  title: Airborne Solutions Software Documentation
+  status: 200
+  registrable_domain: hexagon.com
+  role: docs
+  relation: own
+- host: docs.hexagonali.com
+  found_by:
+  - apis[]
+  - probed
+  - docs-index
+  - well-known
+  types: []
+  serves:
+  - api
+  - docs
+  registrable_domain: hexagonali.com
+  role: docs
+  relation: other-domain
+- host: geocloud.hexagon.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - well-known
+  - vendor-detect
+  types:
+  - Support
+  - SignUp
+  - TermsOfService
+  - Compliance
+  - FAQ
+  serves:
+  - docs
+  - api
+  - hosting
+  vendor: wpengine
+  registrable_domain: hexagon.com
+  role: identity
+  relation: own
+- host: geocloud.hxdr.app
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Login
+  serves: []
+  registrable_domain: hxdr.app
+  role: identity
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  - GitHubOrg
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: hexagon.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  - vendor-detect
+  types:
+  - PrivacyPolicy
+  - Website
+  - Pricing
+  serves:
+  - cdn
+  vendor: cloudflare
+  registrable_domain: hexagon.com
+  role: website
+  relation: own
+- host: hxdr.app
+  found_by:
+  - apis[]
+  - probed
+  - well-known
+  - vendor-detect
+  types: []
+  serves:
+  - api
+  - cdn
+  vendor: cloudfront
+  registrable_domain: hxdr.app
+  role: other
+  relation: other-domain
+- host: nexus.hexagon.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - DeveloperPortal
+  - Documentation
+  serves:
+  - api
+  - docs
+  registrable_domain: hexagon.com
+  role: portal
+  relation: own
+- host: rcdocs.leica-geosystems.com
+  found_by:
+  - probed
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: leica-geosystems.com
+  role: other
+  relation: other-domain
+- host: status.hxdr.app
+  found_by:
+  - pointer
+  - probed
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: hxdr.app
+  role: status
+  relation: other-domain
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: x.com
+  found_by:
+  - pointer
+  types:
+  - X
+  serves: []
+  registrable_domain: x.com
+  role: other
+  relation: platform

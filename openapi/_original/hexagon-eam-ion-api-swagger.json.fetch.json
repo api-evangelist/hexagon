@@ -1,0 +1,11 @@
+{
+ "url": "https://docs.hexagonali.com/api/khub/maps/ARgwuNByyHa~BP9dJen0Kw/attachments/OgQVPuR0s~zYoS49QgbAPA-ARgwuNByyHa~BP9dJen0Kw/content",
+ "final": "https://docs.hexagonali.com/api/khub/maps/ARgwuNByyHa~BP9dJen0Kw/attachments/OgQVPuR0s~zYoS49QgbAPA-ARgwuNByyHa~BP9dJen0Kw/content",
+ "status": 200,
+ "bytes": 8508,
+ "sha256": "9fbb3af26ce78e97be9ba945a1969f337fe4d94b2005a07fd2809527592be97e",
+ "fetched_at": "2026-10-20",
+ "fetched_by": "APIEvangelist-Harvest/1.0",
+ "match": "byte-identical",
+ "note": "EAMApi.json attachment on Hexagon ALI documentation (docs.hexagonali.com). Servers sit on an Infor ION gateway host: HxGN EAM was Infor EAM before Hexagon acquired it (roadmap#979)."
+}

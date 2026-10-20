@@ -1,6 +1,9 @@
 aid: hexagon
+
 name: Hexagon
+
 description: Hexagon is a global leader in digital reality solutions, combining sensor, software and autonomous technologies. Through the Nexus platform and product APIs, Hexagon delivers manufacturing intelligence capabilities spanning metrology, quality inspection, production monitoring, and digital factory solutions. The Nexus Developer Portal provides REST APIs authenticated via OAuth 2.0, enabling manufacturers and third-party developers to build connected, collaborative workflows integrating measurement data, quality processes, and industrial automation across the smart factory lifecycle.
+
 deliveryModel:
   model: saas
   open_source: false
@@ -12,6 +15,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: enterprise
   onboarding: approval
@@ -24,11 +28,17 @@ accessModel:
   - plans
   generated: '2026-07-22'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/hexagon.png
+
 url: https://raw.githubusercontent.com/api-evangelist/hexagon/refs/heads/main/apis.yml
+
 created: '2026-06-13'
+
 modified: '2026-06-13'
+
 specificationVersion: '0.23'
+
 tags:
 - Manufacturing
 - Metrology
@@ -38,6 +48,89 @@ tags:
 - Industrial IoT
 - Smart Manufacturing
 - Geospatial
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: GettingStarted
+  url: https://docs.hexagon.com/hxmap/5.0.0/getting-started
+- type: AgenticAccess
+  url: agentic-access/hexagon-agentic-access.yml
+- type: Spectral
+  url: rules/hexagon-rules.yml
+- type: Vocabulary
+  url: vocabulary/hexagon-vocabulary.yml
+- type: Hosts
+  url: hosts/hexagon-hosts.yml
+- type: IntegrationEdges
+  url: integrations/hexagon-integration-edges.yml
+- type: Vendors
+  url: vendors/hexagon-vendors.yml
+- type: DeveloperPortal
+  url: https://nexus.hexagon.com/developerportal
+- type: Support
+  url: https://geocloud.hexagon.com/contact-support/
+- type: SignUp
+  url: https://geocloud.hexagon.com/free-demo/
+- type: Login
+  url: https://geocloud.hxdr.app/
+- type: TermsOfService
+  url: https://geocloud.hexagon.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://hexagon.com/legal/privacy-notice
+- type: ChangeLog
+  url: changelog/hexagon-changelog.yml
+- type: Deprecation
+  url: lifecycle/hexagon-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/hexagon-lifecycle.yml
+- type: Authentication
+  url: authentication/hexagon-authentication.yml
+- type: OAuthScopes
+  url: scopes/hexagon-scopes.yml
+- type: WellKnown
+  url: well-known/hexagon-well-known.yml
+- type: Conformance
+  url: conformance/hexagon-conformance.yml
+- type: Compliance
+  url: https://geocloud.hexagon.com/security-compliance/
+- type: TrustCenter
+  url: security/hexagon-trust-center.yml
+- type: LLMsTxt
+  url: llms/hexagon-llms.txt
+- type: MCPServer
+  url: mcp/hexagon-mcp.yml
+- type: FAQ
+  url: https://geocloud.hexagon.com/faq/
+- type: AgentSkill
+  url: skills/_index.yml
+- type: GitHubOrganization
+  url: https://github.com/hexagon-oss
+- type: DomainSecurity
+  url: security/hexagon-domain-security.yml
+- type: Website
+  url: https://hexagon.com
+- type: Documentation
+  url: https://nexus.hexagon.com/documentationcenter/en-US/
+- type: GitHubOrg
+  url: https://github.com/hexagonab
+- type: LinkedIn
+  url: https://www.linkedin.com/company/hexagon-ab
+- type: Blog
+  url: https://blog.manufacturing.hexagon.com/
+- type: Pricing
+  url: https://hexagon.com/products/product-groups/nexus
+- type: StatusPage
+  url: https://status.hxdr.app/
+- type: X
+  url: https://x.com/hexagonab
+- type: Plans
+  url: plans/hexagon-plans-pricing.yml
+- type: FinOps
+  url: finops/hexagon-finops.yml
+
 apis:
 - aid: hexagon:nexus-api
   name: Hexagon Nexus API
@@ -68,6 +161,8 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189
+  - type: OpenAPI
+    url: openapi/hexagon-eam-ion-api-openapi.yml
 - aid: hexagon:hxgn-sdx-api
   name: HxGN SDx API Services
   description: Smart Digital eXchange API Services enabling integration with Hexagon's engineering data management platform for plant design, document control, and digital twin workflows in process and power industries.
@@ -122,77 +217,8 @@ apis:
   x-surface: platform-generated
   x-platform: wordpress
   x-platform-surface: mcp-plugin
-common:
-- type: APIReference
-  url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest.md
-- type: DeveloperPortal
-  url: https://nexus.hexagon.com/developerportal
-- type: GettingStarted
-  url: https://rcdocs.leica-geosystems.com/en/hexagon-geocloud/latest/getting-started.md
-- type: Support
-  url: https://geocloud.hexagon.com/contact-support/
-- type: SignUp
-  url: https://geocloud.hexagon.com/free-demo/
-- type: Login
-  url: https://geocloud.hxdr.app/
-- type: TermsOfService
-  url: https://geocloud.hexagon.com/terms-of-use/
-- type: PrivacyPolicy
-  url: https://hexagon.com/legal/privacy-notice
-- type: ChangeLog
-  url: changelog/hexagon-changelog.yml
-- type: Deprecation
-  url: lifecycle/hexagon-lifecycle.yml
-- type: Lifecycle
-  url: lifecycle/hexagon-lifecycle.yml
-- type: Authentication
-  url: authentication/hexagon-authentication.yml
-- type: OAuthScopes
-  url: scopes/hexagon-scopes.yml
-- type: WellKnown
-  url: well-known/hexagon-well-known.yml
-- type: Conformance
-  url: conformance/hexagon-conformance.yml
-- type: Compliance
-  url: https://geocloud.hexagon.com/security-compliance/
-- type: TrustCenter
-  url: security/hexagon-trust-center.yml
-- type: LLMsTxt
-  url: llms/hexagon-llms.txt
-- type: MCPServer
-  url: mcp/hexagon-mcp.yml
-- type: Packages
-  url: packages/hexagon-packages.yml
-- type: FAQ
-  url: https://geocloud.hexagon.com/faq/
-- type: AgentSkill
-  url: skills/_index.yml
-- type: GitHubOrganization
-  url: https://github.com/hexagon-oss
-- type: DomainSecurity
-  url: security/hexagon-domain-security.yml
-- type: Website
-  url: https://hexagon.com
-- type: Documentation
-  url: https://nexus.hexagon.com/documentationcenter/en-US/
-- type: GitHubOrg
-  url: https://github.com/hexagonab
-- type: LinkedIn
-  url: https://www.linkedin.com/company/hexagon-ab
-- type: Blog
-  url: https://blog.manufacturing.hexagon.com/
-- type: Pricing
-  url: https://hexagon.com/products/product-groups/nexus
-- type: StatusPage
-  url: https://status.hxdr.app/
-- type: X
-  url: https://x.com/hexagonab
-- type: Plans
-  url: plans/hexagon-plans-pricing.yml
-- type: RateLimits
-  url: rate-limits/hexagon-rate-limits.yml
-- type: FinOps
-  url: finops/hexagon-finops.yml
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-10-20'
+  status: enriched
+  artifacts_added: 2
+  pass: local-v5

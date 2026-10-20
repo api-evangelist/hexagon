@@ -1,0 +1,319 @@
+swagger: '2.0'
+info:
+  version: v1
+  title: IONAPIPoc
+  x-source: https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189 (attachment
+    EAMApi.json, fetched 2026-10-20)
+  x-ownership: Published by Hexagon as an attachment to its own HxGN EAM 12.0.1 ION
+    API Swagger document; the host is an Infor ION API gateway sample because HxGN
+    EAM (formerly Infor EAM) is exposed through the Infor ION API gateway, and the
+    doc labels it a POC.
+host: inhynhneelapu2.infor.com
+basePath: infor/CustomerApi/eam_api/EWS
+paths:
+  /EWSConnector:
+    post:
+      tags:
+      - Default
+      summary: Xml Input.
+      description: This method have xml as input data Type PostXml
+      operationId: Default_PostXml
+      consumes:
+      - application/json
+      - text/json
+      - application/xml
+      - text/xml
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      - text/json
+      - application/xml
+      - text/xml
+      - application/soap+xml
+      parameters:
+      - name: inputXml
+        in: body
+        required: true
+        schema:
+          type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+definitions:
+  XElement:
+    description: Type XElement.
+    type: object
+    properties:
+      FirstAttribute:
+        type: object
+        readOnly: true
+      HasAttributes:
+        type: boolean
+        readOnly: true
+      HasElements:
+        type: boolean
+        readOnly: true
+      IsEmpty:
+        type: boolean
+        readOnly: true
+      LastAttribute:
+        type: object
+        readOnly: true
+      Name:
+        type: object
+      NodeType:
+        format: int32
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        type: integer
+        readOnly: true
+      Value:
+        type: string
+      FirstNode:
+        type: object
+        readOnly: true
+      LastNode:
+        type: object
+        readOnly: true
+      NextNode:
+        type: object
+        readOnly: true
+      PreviousNode:
+        type: object
+        readOnly: true
+      BaseUri:
+        type: string
+        readOnly: true
+      Document:
+        type: object
+        readOnly: true
+      Parent:
+        type: object
+        readOnly: true
+  XAttribute:
+    description: Type XAttribute.
+    type: object
+    properties:
+      IsNamespaceDeclaration:
+        type: boolean
+        readOnly: true
+      Name:
+        type: object
+        readOnly: true
+      NextAttribute:
+        type: object
+        readOnly: true
+      NodeType:
+        format: int32
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        type: integer
+        readOnly: true
+      PreviousAttribute:
+        type: object
+        readOnly: true
+      Value:
+        type: string
+      BaseUri:
+        type: string
+        readOnly: true
+      Document:
+        type: object
+        readOnly: true
+      Parent:
+        type: object
+        readOnly: true
+  XNode:
+    description: Type Xnode.
+    type: object
+    properties:
+      NextNode:
+        type: object
+        readOnly: true
+      PreviousNode:
+        type: object
+        readOnly: true
+      BaseUri:
+        type: string
+        readOnly: true
+      Document:
+        type: object
+        readOnly: true
+      NodeType:
+        format: int32
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        type: integer
+        readOnly: true
+      Parent:
+        type: object
+        readOnly: true
+  XDocument:
+    description: Type XDocument.
+    type: object
+    properties:
+      Declaration:
+        type: object
+      DocumentType:
+        type: object
+        readOnly: true
+      NodeType:
+        format: int32
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        type: integer
+        readOnly: true
+      Root:
+        type: object
+        readOnly: true
+      FirstNode:
+        type: object
+        readOnly: true
+      LastNode:
+        type: object
+        readOnly: true
+      NextNode:
+        type: object
+        readOnly: true
+      PreviousNode:
+        type: object
+        readOnly: true
+      BaseUri:
+        type: string
+        readOnly: true
+      Document:
+        type: object
+        readOnly: true
+      Parent:
+        type: object
+        readOnly: true
+  XDeclaration:
+    description: Type XDeclaration.
+    type: object
+    properties:
+      Encoding:
+        type: string
+      Standalone:
+        type: string
+      Version:
+        type: string
+  XDocumentType:
+    description: Type XDocumentType.
+    type: object
+    properties:
+      InternalSubset:
+        type: string
+      Name:
+        type: string
+      NodeType:
+        format: int32
+        enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        type: integer
+        readOnly: true
+      PublicId:
+        type: string
+      SystemId:
+        type: string
+      NextNode:
+        type: object
+        readOnly: true
+      PreviousNode:
+        type: object
+        readOnly: true
+      BaseUri:
+        type: string
+        readOnly: true
+      Document:
+        type: object
+        readOnly: true
+      Parent:
+        type: object
+        readOnly: true

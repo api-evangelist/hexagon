@@ -12,12 +12,12 @@ summary:
   query_fields: 93
   mutation_fields: 168
   subscription_fields: 3
-containment_spine: Account -> Project -> root Folder -> nested Folders -> GroupedAsset -> Asset -> Artifact.
-  A GroupedAsset is the user-facing item in a folder; the Asset it wraps carries the geometry and the
-  Artifacts are the processed derivatives (OGC 3D Tiles, HSPC point cloud, LTS, COG, WMS/WMTS/WFS service
-  addresses, panoramic cubemaps, downloadable packages).
-id_convention: Opaque UUID strings on the id field. There are no typed or prefixed identifiers, so an
-  id carries no hint of what it points at - a client must track type alongside id.
+containment_spine: Account -> Project -> root Folder -> nested Folders -> GroupedAsset -> Asset -> Artifact. A GroupedAsset
+  is the user-facing item in a folder; the Asset it wraps carries the geometry and the Artifacts are the processed
+  derivatives (OGC 3D Tiles, HSPC point cloud, LTS, COG, WMS/WMTS/WFS service addresses, panoramic cubemaps, downloadable
+  packages).
+id_convention: Opaque UUID strings on the id field. There are no typed or prefixed identifiers, so an id carries
+  no hint of what it points at - a client must track type alongside id.
 entities:
 - entity: ProjectOutput
   field_count: 21
@@ -42,6 +42,7 @@ entities:
   - kind: has_one
     via: labels
     to: LabelsOutput
+  name: ProjectOutput
 - entity: FolderOutput
   field_count: 16
   identifiers:
@@ -65,6 +66,7 @@ entities:
   - kind: has_many
     via: assets
     to: GroupedAssetResultOutput
+  name: FolderOutput
 - entity: GroupedAssetOutput
   field_count: 33
   identifiers:
@@ -118,6 +120,7 @@ entities:
   - kind: has_one
     via: labels
     to: LabelsOutput
+  name: GroupedAssetOutput
 - entity: AssetOutput
   field_count: 15
   identifiers:
@@ -157,6 +160,7 @@ entities:
   - kind: has_many
     via: ucs
     to: UcsOutput
+  name: AssetOutput
 - entity: SceneOutput
   field_count: 12
   identifiers:
@@ -183,6 +187,7 @@ entities:
   - kind: has_one
     via: modifiedBy
     to: SimpleUserProfileOutput
+  name: SceneOutput
 - entity: CartOutput
   field_count: 13
   identifiers:
@@ -193,6 +198,7 @@ entities:
   - kind: has_many
     via: cartItems
     to: CartItemOutput
+  name: CartOutput
 - entity: StreamingSubscriptionOutput
   field_count: 13
   identifiers:
@@ -202,32 +208,226 @@ entities:
   - kind: has_one
     via: processingPipelineInfo
     to: ProcessingPipelineInfoOutput
+  name: StreamingSubscriptionOutput
 - entity: EndpointOutput
   field_count: 3
   identifiers: []
   relationships: []
+  name: EndpointOutput
 address_polymorphism:
   interface: AddressInterface
-  note: 'The delivery address of any processed output is polymorphic. AddressInterface.endpoint is documented
-    in the schema as "the path of the object, needs to be appended to the domain of the backend to form
-    a complete URL", and concrete members select the delivery standard: AddressOgc3DOutput, AddressWmsOutput,
-    AddressWmtsOutput, AddressWfsOutput, AddressHspcOutput, AddressLtsOutput, AddressCogOutput, AddressCubemapJsonOutput,
-    AddressGeoJsonOutput, AddressPackOutput, AddressZipOutput, AddressDownloadableOutput. This is where
-    the OGC standards recorded in conformance/hexagon-ab-conformance.yml actually surface at runtime.'
+  note: 'The delivery address of any processed output is polymorphic. AddressInterface.endpoint is documented in
+    the schema as "the path of the object, needs to be appended to the domain of the backend to form a complete
+    URL", and concrete members select the delivery standard: AddressOgc3DOutput, AddressWmsOutput, AddressWmtsOutput,
+    AddressWfsOutput, AddressHspcOutput, AddressLtsOutput, AddressCogOutput, AddressCubemapJsonOutput, AddressGeoJsonOutput,
+    AddressPackOutput, AddressZipOutput, AddressDownloadableOutput. This is where the OGC standards recorded in
+    conformance/hexagon-ab-conformance.yml actually surface at runtime.'
 baselayers:
-  note: A parallel polymorphic family for map backdrops - BaselayerOgc3DOutput, BaselayerWmsOutput,
-    BaselayerWmtsOutput, BaselayerWfsOutput, BaselayerHspcOutput, BaselayerLtsOutput, BaselayerPanoramicOutput,
-    BaselayerUrlOutput - created by the matching mutations createOgc3dBaselayer, createWmsBaselayer,
-    createWmtsBaselayer and createWfsBaselayer, all gated on the CAN_EDIT_BASELAYER platform capability.
+  note: A parallel polymorphic family for map backdrops - BaselayerOgc3DOutput, BaselayerWmsOutput, BaselayerWmtsOutput,
+    BaselayerWfsOutput, BaselayerHspcOutput, BaselayerLtsOutput, BaselayerPanoramicOutput, BaselayerUrlOutput -
+    created by the matching mutations createOgc3dBaselayer, createWmsBaselayer, createWmtsBaselayer and createWfsBaselayer,
+    all gated on the CAN_EDIT_BASELAYER platform capability.
 commerce_subgraph:
-  note: A data-store shop is stitched into the same schema - CartOutput, CartItemOutput, quotation,
-    getCart, viewCart, getAllOrders, getOrder, getLastOrder, getActivePaymentCard, getStripePublicKey,
-    supportedCountries, validateAddressV2. Most of the subscription half is deprecated for 2026-09-30
-    with the reason "Stripe subscriptions are no longer supported".
+  note: A data-store shop is stitched into the same schema - CartOutput, CartItemOutput, quotation, getCart, viewCart,
+    getAllOrders, getOrder, getLastOrder, getActivePaymentCard, getStripePublicKey, supportedCountries, validateAddressV2.
+    Most of the subscription half is deprecated for 2026-09-30 with the reason "Stripe subscriptions are no longer
+    supported".
 authorization_model:
-  note: Capability-based, expressed in mutation descriptions rather than in scopes - named platform
-    capabilities such as CAN_EDIT_BASELAYER and CAN_EDIT_STREAMING_SUBSCRIPTION gate individual mutations,
-    and project membership roles gate the project spine. None of these capability names appear in the
-    OAuth scope list at scopes/hexagon-ab-scopes.yml, so the token scope and the in-app permission are
-    two different systems.
+  note: Capability-based, expressed in mutation descriptions rather than in scopes - named platform capabilities
+    such as CAN_EDIT_BASELAYER and CAN_EDIT_STREAMING_SUBSCRIPTION gate individual mutations, and project membership
+    roles gate the project spine. None of these capability names appear in the OAuth scope list at scopes/hexagon-ab-scopes.yml,
+    so the token scope and the in-app permission are two different systems.
 render: null
+relationships:
+- from: ProjectOutput
+  to: ProjectMembersResultOutput
+  type: has_many
+  via: projectMembers
+- from: ProjectOutput
+  to: FolderOutput
+  type: has_one
+  via: rootFolder
+- from: ProjectOutput
+  to: SimpleUserProfileOutput
+  type: has_one
+  via: createdBy
+- from: ProjectOutput
+  to: SimpleUserProfileOutput
+  type: has_one
+  via: modifiedBy
+- from: ProjectOutput
+  to: SimpleUserProfileOutput
+  type: has_one
+  via: ownedBy
+- from: ProjectOutput
+  to: LabelsOutput
+  type: has_one
+  via: labels
+- from: FolderOutput
+  to: ProjectOutput
+  type: has_one
+  via: project
+- from: FolderOutput
+  to: FolderOutput
+  type: has_one
+  via: parentFolder
+- from: FolderOutput
+  to: FolderResultOutput
+  type: has_many
+  via: folders
+- from: FolderOutput
+  to: SimpleUserProfileOutput
+  type: has_one
+  via: createdBy
+- from: FolderOutput
+  to: SimpleUserProfileOutput
+  type: has_one
+  via: modifiedBy
+- from: FolderOutput
+  to: GroupedAssetResultOutput
+  type: has_many
+  via: assets
+- from: GroupedAssetOutput
+  to: LabelAnnotationOutput
+  type: has_many
+  via: labelAnnotations
+- from: GroupedAssetOutput
+  to: MeasurementAnnotationOutput
+  type: has_many
+  via: measurementAnnotations
+- from: GroupedAssetOutput
+  to: LimitingBoxAnnotationOutput
+  type: has_many
+  via: limitingBoxAnnotations
+- from: GroupedAssetOutput
+  to: LevelResultOutput
+  type: has_many
+  via: levels
+- from: GroupedAssetOutput
+  to: FloorPlanResultOutput
+  type: has_many
+  via: floorPlans
+- from: GroupedAssetOutput
+  to: SharingCodeOutput
+  type: has_many
+  via: sharingCodes
+- from: GroupedAssetOutput
+  to: AssetOutput
+  type: has_one
+  via: asset
+- from: GroupedAssetOutput
+  to: FolderOutput
+  type: has_one
+  via: folder
+- from: GroupedAssetOutput
+  to: SimpleUserProfileOutput
+  type: has_one
+  via: createdBy
+- from: GroupedAssetOutput
+  to: SimpleUserProfileOutput
+  type: has_one
+  via: modifiedBy
+- from: GroupedAssetOutput
+  to: AssetBBoxOutput
+  type: has_one
+  via: bbox
+- from: GroupedAssetOutput
+  to: AssetVersionResultOutput
+  type: has_many
+  via: versions
+- from: GroupedAssetOutput
+  to: GroupedAssetGeoreferenceResultsOutput
+  type: has_one
+  via: groupedAssetGeoreferences
+- from: GroupedAssetOutput
+  to: GroupedAssetTourResultOutput
+  type: has_many
+  via: tours
+- from: GroupedAssetOutput
+  to: ViewpointOutput
+  type: has_one
+  via: viewpoint
+- from: GroupedAssetOutput
+  to: LabelsOutput
+  type: has_one
+  via: labels
+- from: AssetOutput
+  to: AvailableProcessingPipelinesUnion
+  type: has_one
+  via: availableProcessingPipelines
+- from: AssetOutput
+  to: Point3DOutput
+  type: has_one
+  via: anchorPoint
+- from: AssetOutput
+  to: ArtifactResultOutput
+  type: has_many
+  via: artifacts
+- from: AssetOutput
+  to: ArtifactResultOutputV2
+  type: has_one
+  via: artifactsV2
+- from: AssetOutput
+  to: ArtifactResultOutputV3
+  type: has_one
+  via: artifactsV3
+- from: AssetOutput
+  to: ReferencedBoundsOutput
+  type: has_one
+  via: referencedBounds
+- from: AssetOutput
+  to: FileResultOutput
+  type: has_many
+  via: files
+- from: AssetOutput
+  to: JobSummaryGQL
+  type: has_one
+  via: jobSummary
+- from: AssetOutput
+  to: JobPage
+  type: has_many
+  via: jobDetail
+- from: AssetOutput
+  to: ArtifactPayloadOutput
+  type: has_one
+  via: primaryArtifact
+- from: AssetOutput
+  to: UcsOutput
+  type: has_many
+  via: ucs
+- from: SceneOutput
+  to: SceneRootNodeOutput
+  type: has_one
+  via: rootNode
+- from: SceneOutput
+  to: ProjectOutput
+  type: has_one
+  via: project
+- from: SceneOutput
+  to: SceneGeolocationOutput
+  type: has_one
+  via: geolocation
+- from: SceneOutput
+  to: SceneLockOutput
+  type: has_many
+  via: locks
+- from: SceneOutput
+  to: SceneGenerationStatusUnion
+  type: has_one
+  via: sceneGenerationStatus
+- from: SceneOutput
+  to: SimpleUserProfileOutput
+  type: has_one
+  via: createdBy
+- from: SceneOutput
+  to: SimpleUserProfileOutput
+  type: has_one
+  via: modifiedBy
+- from: CartOutput
+  to: CartItemOutput
+  type: has_many
+  via: cartItems
+- from: StreamingSubscriptionOutput
+  to: ProcessingPipelineInfoOutput
+  type: has_one
+  via: processingPipelineInfo

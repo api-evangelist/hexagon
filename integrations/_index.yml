@@ -19,18 +19,18 @@
     registered_name: Hexagon
     register_id: Hexagon
     detected_by: sweep-geospatial.py
-    detected: '2026-10-14'
+    detected: '2026-10-19'
   status: not-a-workflow
   arazzo: null
-- slug: hexagon-procore-own
-  label: Procore (own)
-  partner: procore
-  partner_name: Procore (own)
-  category: Analytics; BIM
+- slug: hexagon-autodesk-own
+  label: Autodesk (own)
+  partner: autodesk
+  partner_name: Autodesk (own)
+  category: ACCBD5K/BM36DP
   type: marketplace
   marketplace: own
   channel: partner-built
-  evidence: https://marketplace.procore.com/apps/hexagon-construction-analysis
+  evidence: https://marketplace.autodesk.com/apps/d49bb035-51a3-4df9-8b0f-327fe861cd55
   source: edge
   relationship: platform-app
   status: not-a-workflow
@@ -46,5 +46,39 @@
   evidence: https://appsource.microsoft.com/en-us/product/office/WA200006032
   source: edge
   relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: hexagon-cloud-security-alliance-star-registry
+  label: Cloud Security Alliance STAR Registry
+  partner_name: Cloud Security Alliance STAR Registry
+  category: Cloud security assurance
+  type: register
+  channel: standard-directory
+  evidence: https://cloudsecurityalliance.org/star/registry/hexagon/services/hexagon-building-solutions
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: CSA STAR Registry (cloudsecurityalliance.org/star/registry)
+    spec_file: null
+    standard: CSA STAR
+    role: star-level-2
+    registered_name: Hexagon
+    registry_id: hexagon
+    service_url: https://bld.hexagon.com/Building-Solutions
+    matched_domain: hexagon.com
+    matched_by: domain+name-among-holders
+    identity_source: the service URL the organisation filed on its STAR listing (no lookup)
+    levels:
+    - STAR Level 1
+    - STAR Level 2
+    certified_products:
+    - product: STAR Certification
+      lapsed: false
+      latest: '2025-11-07'
+    signal_note: STAR Level 1 (CAIQ self-assessment) = participation; certified_products = one entry per STAR Level
+      2 / STAR for AI Level 2 assessment TYPE (third-party certification, attestation, C-STAR, ValidAIted); lapsed
+      = every instance marked (Deprecated) by the registry; service counts never recorded
+    detected_by: sweep-compliance-assurance.py
+    detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
