@@ -317,3 +317,9 @@ definitions:
       Parent:
         type: object
         readOnly: true
+x-provenance:
+  method: harvested
+  publisher: Hexagon
+  source: https://docs.hexagonali.com/api/khub/maps/ARgwuNByyHa~BP9dJen0Kw/attachments/OgQVPuR0s~zYoS49QgbAPA-ARgwuNByyHa~BP9dJen0Kw/content
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
