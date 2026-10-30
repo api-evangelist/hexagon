@@ -1,4 +1,4 @@
-# Hexagon (hexagon)
+# Hexagon
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,93 +66,142 @@
 
 Hexagon is a global leader in digital reality solutions, combining sensor, software and autonomous technologies. Through the Nexus platform and product APIs, Hexagon delivers manufacturing intelligence capabilities spanning metrology, quality inspection, production monitoring, and digital factory solutions. The Nexus Developer Portal provides REST APIs authenticated via OAuth 2.0, enabling manufacturers and third-party developers to build connected, collaborative workflows integrating measurement data, quality processes, and industrial automation across the smart factory lifecycle.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/hexagon/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/hexagon/refs/heads/main/apis.yml)
+**Areas:** Manufacturing · Metrology · Quality Inspection · Digital Factory · Production Monitoring · Industrial IoT · Smart Manufacturing · Geospatial
 
-## Tags
+## Hexagon on APIs.io
 
-- Manufacturing
-- Metrology
-- Quality Inspection
-- Digital Factory
-- Production Monitoring
-- Industrial IoT
-- Smart Manufacturing
+Everything profiled for Hexagon is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/hexagon/](https://apis.io/providers/hexagon/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
+- [Hexagon Nexus API](https://apis.io/apis/hexagon/nexus-api/) — REST APIs for the Nexus digital reality platform enabling manufacturers to build connected workflows integrating metrology, quality inspection, and…
+- [HxGN EAM REST API](https://apis.io/apis/hexagon/hxgn-eam-api/) — Enterprise Asset Management REST API providing programmatic access to asset lifecycle data including equipment management, work orders, preventive…
+- [HxGN SDx API Services](https://apis.io/apis/hexagon/hxgn-sdx-api/) — Smart Digital eXchange API Services enabling integration with Hexagon's engineering data management platform for plant design, document control, and digital…
+- [Hexagon GeoCloud GraphQL API](https://apis.io/apis/hexagon/geocloud-graphql/) — The federated GraphQL API behind Hexagon GeoCloud (formerly HxDR / Reality Cloud Studio) for uploading, processing, organising, streaming and sharing…
+- [Hexagon GeoCloud MCP Server](https://apis.io/apis/hexagon/geocloud-mcp/) — A remote Model Context Protocol endpoint served from the Hexagon GeoCloud web property and discoverable through RFC 9728 protected-resource metadata and RFC…
 
-## APIs
+### Published properties
 
-### Hexagon Nexus API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-REST APIs for the Nexus digital reality platform enabling manufacturers to build connected workflows integrating metrology, quality inspection, and production monitoring data. All endpoints are authenticated via OAuth 2.0 and route through an Application Gateway for rate limiting, quota management, logging, and analytics.
+#### MCP servers (1)
 
-- **Human URL:** [https://nexus.hexagon.com/developerportal](https://nexus.hexagon.com/developerportal)
-- **Base URL:** `https://nexus.hexagon.com`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [Hexagon GeoCloud MCP](https://apis.io/servers/hexagon/hexagon-geocloud-mcp/)
 
-- Manufacturing
-- Metrology
-- Quality
-- Production
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://nexus.hexagon.com/documentationcenter/en-US/)
-- [OpenAPI](https://nexus.hexagon.com/developerportal) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Hexagon Agentic Access](https://apis.io/agentic-access/hexagon/hexagon-agentic-access/)
 
-### HxGN EAM REST API
+#### Governance rules (1)
 
-Enterprise Asset Management REST API providing programmatic access to asset lifecycle data including equipment management, work orders, preventive maintenance, document attachments, and service requests. Defined in OpenAPI 3 and available through the Hexagon documentation portal.
+Spectral rulesets for the provider's contracts.
 
-- **Human URL:** [https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189](https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189)
-- **Base URL:** `https://docs.hexagonali.com`
+- [Hexagon API Rules](https://apis.io/rules/hexagon/hexagon-rules/)
 
-#### Tags
+#### Security (3)
 
-- Enterprise Asset Management
-- Maintenance
-- Equipment
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Hexagon Authentication](https://apis.io/security/hexagon/hexagon-authentication/)
+- [Hexagon Domain Security](https://apis.io/security/hexagon/hexagon-domain-security/)
+- [Hexagon Trust Center](https://apis.io/security/hexagon/hexagon-trust-center/)
 
-- [Documentation](https://docs.hexagonali.com/r/en-US/HxGN-EAM-ION-API-Swagger/1278189)
+#### OAuth scopes (1)
 
-### HxGN SDx API Services
+The permissions the API asks for.
 
-Smart Digital eXchange API Services enabling integration with Hexagon's engineering data management platform for plant design, document control, and digital twin workflows in process and power industries.
+- [Hexagon Scopes](https://apis.io/scopes/hexagon/hexagon-scopes/)
 
-- **Human URL:** [https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413](https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413)
-- **Base URL:** `https://docs.hexagonali.com`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Digital Twin
-- Engineering Data
-- Plant Design
+- [Hexagon Plans Pricing](https://apis.io/plans/hexagon/hexagon-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://docs.hexagonali.com/r/en-US/HxGN-SDx-API-Services-Configuration/1445413)
+Published request limits.
 
-## Common Properties
+- [Hexagon Rate Limits](https://apis.io/rate-limits/hexagon/hexagon-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Hexagon Finops](https://apis.io/finops/hexagon/hexagon-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://hexagon.com)
 - [Documentation](https://nexus.hexagon.com/documentationcenter/en-US/)
-- [Git Hub Org](https://github.com/hexagonab)
-- [LinkedIn](https://www.linkedin.com/company/hexagon-ab)
-- [Blog](https://blog.manufacturing.hexagon.com/)
+- [Getting started](https://docs.hexagon.com/hxmap/5.0.0/getting-started)
 - [Pricing](https://hexagon.com/products/product-groups/nexus)
-- [Status Page](https://status.hxdr.app/)
-- [X (Twitter)](https://x.com/hexagonab)
-- [Plans](plans/hexagon-plans-pricing.yml)
-- [Rate Limits](rate-limits/hexagon-rate-limits.yml)
-- [Fin Ops](finops/hexagon-finops.yml)
+- [Sign up](https://geocloud.hexagon.com/free-demo/)
+- [Support](https://geocloud.hexagon.com/contact-support/)
+- [Blog](https://blog.manufacturing.hexagon.com/)
+- [Compliance](https://geocloud.hexagon.com/security-compliance/)
+- [Terms of service](https://geocloud.hexagon.com/terms-of-use/)
+- [Privacy policy](https://hexagon.com/legal/privacy-notice)
+- [GitHub](https://github.com/hexagon-oss)
+- [Status](https://status.hxdr.app/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 56.4** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 46.1 |
+| Contract governance | 35.6 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 51.8 |
+| Access clarity | 68.4 |
+
+**Agent readiness 23.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 39.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/hexagon/](https://apis.io/providers/hexagon/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Hexagon: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/hexagon/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
